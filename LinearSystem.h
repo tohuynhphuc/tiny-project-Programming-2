@@ -1,0 +1,4 @@
+#ifndef LINEAR_SYSTEM_HEADER
+#define LINEAR_SYSTEM_HEADER
+
+#endif

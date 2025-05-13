@@ -1,6 +1,5 @@
 #include "Vector.h"
 
-#include <cassert>
 #include <iostream>
 #include <stdexcept>
 
