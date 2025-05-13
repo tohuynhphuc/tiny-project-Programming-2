@@ -2,11 +2,11 @@
 #define VECTOR_HEADER
 
 class Vector {
-private:
+   private:
     int mSize;
     double* mData;
 
-public:
+   public:
     // Constructor
     Vector(int size = 0);
     Vector(const Vector& other);
@@ -41,7 +41,7 @@ public:
 
     // If vector is const -> use this
     const double& operator[](int index) const;
-    const double& operator()(int index) const;
+    const double& operator()(int index_1) const;
 };
 
 #endif
