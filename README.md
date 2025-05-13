@@ -48,7 +48,7 @@ In Part B, you will apply linear regression to predict relative CPU performance 
 2. **Linear Regression Model**: 
    - Implement the linear regression model for predicting the relative performance of CPUs based on the formula:
    \[
-   PRP = x_1 \cdot MYCT + x_2 \cdot MMIN + x_3 \cdot MMAX + x_4 \cdot CACH + x_5 \cdot CHMIN + x_6 \cdot CHMAX
+   \text{PRP} = x_1 \cdot \text{MYCT} + x_2 \cdot \text{MMIN} + x_3 \cdot \text{MMAX} + x_4 \cdot \text{CACH} + x_5 \cdot \text{CHMIN} + x_6 \cdot \text{CHMAX}
    \]
    
 3. **Evaluation**: 
