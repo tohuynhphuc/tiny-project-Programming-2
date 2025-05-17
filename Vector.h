@@ -1,8 +1,8 @@
 #ifndef VECTOR_HEADER
 #define VECTOR_HEADER
 
-#include <string>
 #include <sstream>
+#include <string>
 
 class Vector {
    private:
@@ -11,33 +11,33 @@ class Vector {
 
    public:
     // Constructor
-    Vector(int size); // default
-		Vector(double array[], int size); // array input
-    Vector(const Vector& other); // Vector input
+    Vector(int size);                  // default
+    Vector(double array[], int size);  // array input
+    Vector(const Vector& other);       // Vector input
 
     // Destructor
     ~Vector();
 
     // Assignment Operator
-    Vector& operator=(const Vector& other); // DOES change original vector
+    Vector& operator=(const Vector& other);  // DOES change original vector
 
     // Unary Operator
-    Vector operator-() const; // DOES NOT change original vector
+    Vector operator-() const;  // DOES NOT change original vector
 
     // Binary Operator
     // Vector ... const -> return new object
     // Vector& ...      -> assign back to current object
-    Vector operator+(const Vector& other) const; // DOES NOT change original vector
-    Vector& operator+=(const Vector& other); //	 DOES change original vector
+    Vector operator+(const Vector& other) const;
+    Vector& operator+=(const Vector& other);
 
-    Vector operator-(const Vector& other) const; // DOES NOT change original vector
-    Vector& operator-=(const Vector& other); // DOES change original vector
+    Vector operator-(const Vector& other) const;
+    Vector& operator-=(const Vector& other);
 
-    Vector operator*(double scalar) const; // DOES NOT change original vector
-    Vector& operator*=(double scalar); // DOES change original vector
+    Vector operator*(double scalar) const;
+    Vector& operator*=(double scalar);
 
     // Dot Product (maybe?)
-    double operator*(const Vector& other) const; // DOES NOT change original vector
+    double operator*(const Vector& other) const;
 
     // [] ()
     double& operator[](int index);
@@ -47,8 +47,8 @@ class Vector {
     const double& operator[](int index) const;
     const double& operator()(int index_1) const;
 
-		// toString
-		std::string toString();
+    // toString
+    std::string toString();
 };
-    
+
 #endif

@@ -1,231 +1,241 @@
 #include "Vector.h"
 
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
-#include <sstream>
 
 using namespace std;
 
 // Constructor
 Vector::Vector(int size) {
-		if (size < 0) {
-				throw std::invalid_argument("Vector sizes must be non-negative.");
-		}
+    if (size < 0) {
+        throw std::invalid_argument("Vector sizes must be non-negative.");
+    }
 
-		mSize = size;
+    mSize = size;
 
-		if (mSize == 0) {
-				mData = nullptr;
-		} else if (mSize > 0) {
-				mData = new double[mSize]();
-		}
+    if (mSize == 0) {
+        mData = nullptr;
+    } else if (mSize > 0) {
+        mData = new double[mSize]();
+    }
 }
 Vector::Vector(double array[], int size) {
-	if (!array || size <= 0) {
-		Vector(0); // if empty array, create default vector
-	} else {
-		mSize = size;
-		mData = new double[mSize];
+    if (!array || size <= 0) {
+        Vector(0);  // if empty array, create default vector
+    } else {
+        mSize = size;
+        mData = new double[mSize];
 
-		for (int i = 0; i < mSize; i++) {
-			mData[i] = array[i];
-		}
-	}
+        for (int i = 0; i < mSize; i++) {
+            mData[i] = array[i];
+        }
+    }
 }
 Vector::Vector(const Vector& other) {
-		mSize = other.mSize;
+    mSize = other.mSize;
 
-		if (mSize == 0) {
-				mData = nullptr;
-		} else if (mSize > 0) {
-				mData = new double[mSize];
+    if (mSize == 0) {
+        mData = nullptr;
+    } else if (mSize > 0) {
+        mData = new double[mSize];
 
-				for (int i = 0; i < mSize; i++) {
-						mData[i] = other.mData[i];
-				}
-		}
+        for (int i = 0; i < mSize; i++) {
+            mData[i] = other.mData[i];
+        }
+    }
 }
 
 // Destructor
 Vector::~Vector() {
-		delete[] mData;
-		mSize = 0;
+    delete[] mData;
+    mSize = 0;
 }
 
 // Assignment Operator
-Vector& Vector::operator=(const Vector& other) {// DOES change original vector
-		// Check for self-assignment
-		if (this == &other) {
-				return *this;
-		}
+// DOES change original vector
+Vector& Vector::operator=(const Vector& other) {
+    // Check for self-assignment
+    if (this == &other) {
+        return *this;
+    }
 
-		delete[] mData;
+    delete[] mData;
 
-		mSize = other.mSize;
+    mSize = other.mSize;
 
-		if (mSize == 0) {
-				mData = nullptr;
-		} else if (mSize > 0) {
-				mData = new double[mSize];
+    if (mSize == 0) {
+        mData = nullptr;
+    } else if (mSize > 0) {
+        mData = new double[mSize];
 
-				for (int i = 0; i < mSize; i++) {
-						mData[i] = other.mData[i];
-				}
-		}
+        for (int i = 0; i < mSize; i++) {
+            mData[i] = other.mData[i];
+        }
+    }
 
-		return *this;
+    return *this;
 }
 
 // Unary Operator: negative, increment, decrement
-Vector Vector::operator-() const {// DOES NOT change original vector
-		Vector result = Vector(mSize);
-		for (int i = 0; i < mSize; i++) {
-				result.mData[i] = -this->mData[i];
-		}
+// DOES NOT change original vector
+Vector Vector::operator-() const {
+    Vector result = Vector(mSize);
+    for (int i = 0; i < mSize; i++) {
+        result.mData[i] = -this->mData[i];
+    }
 
-		return result;
+    return result;
 }
 
 // Binary Operator
 // Vector ... const -> return new object
 // Vector& ...      -> assign back to current object
-Vector Vector::operator+(const Vector& other) const {// DOES NOT change original vector
-		if (mSize != other.mSize) {
-				throw std::invalid_argument("Vector sizes must match for addition.");
-		}
 
-		Vector result = Vector(mSize);
+// DOES NOT change original vector
+Vector Vector::operator+(const Vector& other) const {
+    if (mSize != other.mSize) {
+        throw std::invalid_argument("Vector sizes must match for addition.");
+    }
 
-		for (int i = 0; i < mSize; i++) {
-				result.mData[i] = mData[i] + other.mData[i];
-		}
+    Vector result = Vector(mSize);
 
-		return result;
+    for (int i = 0; i < mSize; i++) {
+        result.mData[i] = mData[i] + other.mData[i];
+    }
+
+    return result;
 }
 
-Vector& Vector::operator+=(const Vector& other) {// DOES change original vector
-		if (mSize != other.mSize) {
-				throw std::invalid_argument("Vector sizes must match for addition.");
-		}
+// DOES change original vector
+Vector& Vector::operator+=(const Vector& other) {
+    if (mSize != other.mSize) {
+        throw std::invalid_argument("Vector sizes must match for addition.");
+    }
 
-		for (int i = 0; i < mSize; i++) {
-				mData[i] += other.mData[i];
-		}
+    for (int i = 0; i < mSize; i++) {
+        mData[i] += other.mData[i];
+    }
 
-		return *this;
+    return *this;
 }
 
-Vector Vector::operator-(const Vector& other) const {// DOES NOT change original vector
-		if (mSize != other.mSize) {
-				throw std::invalid_argument("Vector sizes must match for subtraction.");
-		}
+// DOES NOT change original vector
+Vector Vector::operator-(const Vector& other) const {
+    if (mSize != other.mSize) {
+        throw std::invalid_argument("Vector sizes must match for subtraction.");
+    }
 
-		Vector result = Vector(mSize);
+    Vector result = Vector(mSize);
 
-		for (int i = 0; i < mSize; i++) {
-				result.mData[i] = mData[i] - other.mData[i];
-		}
+    for (int i = 0; i < mSize; i++) {
+        result.mData[i] = mData[i] - other.mData[i];
+    }
 
-		return result;
+    return result;
 }
 
-Vector& Vector::operator-=(const Vector& other) {// DOES change original vector
-		if (mSize != other.mSize) {
-				throw std::invalid_argument("Vector sizes must match for subtraction.");
-		}
+// DOES change original vector
+Vector& Vector::operator-=(const Vector& other) {
+    if (mSize != other.mSize) {
+        throw std::invalid_argument("Vector sizes must match for subtraction.");
+    }
 
-		for (int i = 0; i < mSize; i++) {
-				mData[i] -= other.mData[i];
-		}
+    for (int i = 0; i < mSize; i++) {
+        mData[i] -= other.mData[i];
+    }
 
-		return *this;
+    return *this;
 }
 
-Vector Vector::operator*(double scalar) const {// DOES NOT change original vector
-		Vector result = Vector(mSize);
+// DOES NOT change original vector
+Vector Vector::operator*(double scalar) const {
+    Vector result = Vector(mSize);
 
-		for (int i = 0; i < mSize; i++) {
-				result.mData[i] = mData[i] * scalar;
-		}
+    for (int i = 0; i < mSize; i++) {
+        result.mData[i] = mData[i] * scalar;
+    }
 
-		return result;
+    return result;
 }
 
-Vector& Vector::operator*=(double scalar) {// DOES change original vector
-		for (int i = 0; i < mSize; i++) {
-				mData[i] *= scalar;
-		}
+// DOES change original vector
+Vector& Vector::operator*=(double scalar) {
+    for (int i = 0; i < mSize; i++) {
+        mData[i] *= scalar;
+    }
 
-		return *this;
+    return *this;
 }
 
 // Dot Product (maybe?)
-double Vector::operator*(const Vector& other) const {// DOES NOT change original vector
-		if (mSize != other.mSize) {
-				throw std::invalid_argument("Vector sizes must match for dot product.");
-		}
+// DOES NOT change original vector
+double Vector::operator*(const Vector& other) const {
+    if (mSize != other.mSize) {
+        throw std::invalid_argument("Vector sizes must match for dot product.");
+    }
 
-		double result = 0;
+    double result = 0;
 
-		for (int i = 0; i < mSize; i++) {
-				result += mData[i] * other.mData[i];
-		}
+    for (int i = 0; i < mSize; i++) {
+        result += mData[i] * other.mData[i];
+    }
 
-		return result;
+    return result;
 }
 
 // [] ()
 double& Vector::operator[](int index) {
-		if (index < 0 || index >= mSize) {
-				throw std::out_of_range(
-						"Index out of range in operator[]: must be between 0 and " +
-						std::to_string(mSize - 1));
-		}
+    if (index < 0 || index >= mSize) {
+        throw std::out_of_range(
+            "Index out of range in operator[]: must be between 0 and " +
+            std::to_string(mSize - 1));
+    }
 
-		return mData[index];
+    return mData[index];
 }
 double& Vector::operator()(int index_1) {
-		if (index_1 < 1 || index_1 > mSize) {
-				throw std::out_of_range(
-						"Index out of range in operator(): must be between 1 and " +
-						std::to_string(mSize));
-		}
+    if (index_1 < 1 || index_1 > mSize) {
+        throw std::out_of_range(
+            "Index out of range in operator(): must be between 1 and " +
+            std::to_string(mSize));
+    }
 
-		return mData[index_1 - 1];
+    return mData[index_1 - 1];
 }
 
 // If vector is const -> use this
 const double& Vector::operator[](int index) const {
-		if (index < 0 || index >= mSize) {
-				throw std::out_of_range(
-						"Index out of range in operator[]: must be between 0 and " +
-						std::to_string(mSize - 1));
-		}
+    if (index < 0 || index >= mSize) {
+        throw std::out_of_range(
+            "Index out of range in operator[]: must be between 0 and " +
+            std::to_string(mSize - 1));
+    }
 
-		return mData[index];
+    return mData[index];
 }
 const double& Vector::operator()(int index_1) const {
-		if (index_1 < 1 || index_1 > mSize) {
-				throw std::out_of_range(
-						"Index out of range in operator(): must be between 1 and " +
-						std::to_string(mSize));
-		}
+    if (index_1 < 1 || index_1 > mSize) {
+        throw std::out_of_range(
+            "Index out of range in operator(): must be between 1 and " +
+            std::to_string(mSize));
+    }
 
-		return mData[index_1 - 1];
+    return mData[index_1 - 1];
 }
 
 // toString
 std::string Vector::toString() {
-	string result = "[";
-	for (int i = 0; i < mSize; i++) {
-		result += to_string(mData[i]);
+    string result = "[";
+    for (int i = 0; i < mSize; i++) {
+        result += to_string(mData[i]);
 
-		if (i < mSize - 1) {// if not the last element, add ,
-			result += ", ";
-		}
-	}
-	result += "]";
+        if (i < mSize - 1) {  // if not the last element, add ,
+            result += ", ";
+        }
+    }
+    result += "]";
 
-	return result;
+    return result;
 }
