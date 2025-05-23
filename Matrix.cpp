@@ -158,14 +158,24 @@ Matrix Matrix::operator--(int) {
 
 // Binary Operator
 Matrix Matrix::operator+(const Matrix& other) const {
-    Matrix result;
-    result.allocateMemory(other.mNumRows, other.mNumCols);
-    for (int i = 0; i < other.mNumRows; i++) {
-        for (int j = 0; j < other.mNumCols; j++) {
+    assert(mNumRows == other.mNumRows && mNumCols == other.mNumCols);
+    Matrix result(mNumRows, mNumCols);
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
             result.mData[i][j] = this->mData[i][j] + other.mData[i][j];
         }
     }
     return result;
+}
+
+Matrix& Matrix::operator+=(const Matrix& other) {
+    assert(mNumRows == other.mNumRows && mNumCols == other.mNumCols);
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
+            this->mData[i][j] += other.mData[i][j];
+        }
+    }
+    return *this;
 }
 
 // DOES NOT change original matrix
@@ -183,6 +193,16 @@ Matrix Matrix::operator-(const Matrix& other) const {
         }
     }
     return result;
+}
+
+Matrix& Matrix::operator-=(const Matrix& other) {
+    assert(mNumRows == other.mNumRows && mNumCols == other.mNumCols);
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
+            this->mData[i][j] -= other.mData[i][j];
+        }
+    }
+    return *this;
 }
 
 Matrix Matrix::convertToTriangleMatrix() const { assert(mNumRows == mNumCols); }
