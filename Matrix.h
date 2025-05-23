@@ -22,7 +22,7 @@ class Matrix{
     // const operator() 
     double operator()(int i, int j) const;
     // non-const operator()
-    double& operator()(int i, int j); 
+    double& operator()(int i, int j);
 
 };
 
