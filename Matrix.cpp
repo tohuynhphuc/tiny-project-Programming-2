@@ -52,11 +52,27 @@ Matrix::~Matrix(){
     delete[] mData;
 }
 
-//Access to the number of rows and columns
+// Access to the number of rows and columns
 int Matrix::getNumRows() const{
     return mNumRows;
 }
 
 int Matrix::getNumCols() const{
     return mNumCols;
+}
+
+// const operator(): only allow to reand 
+double Matrix::operator()(int i, int j){
+    if (i < 1 || i > rows || j < 1 || j > cols){
+        throw std::invalid_argument("Index is out of range");
+    }
+    return mData[i-1][j-1];
+}
+
+// non-const operator(): can modify and assign to a matrix
+double& Matrix::operator()(int i, int j){
+    if (i < 1 || i > rows || j < 1 || j > cols){
+        throw std::invalid_argument("Index is out of range");
+    }
+    return mData[i-1][j-1];
 }

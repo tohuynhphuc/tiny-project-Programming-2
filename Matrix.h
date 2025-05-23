@@ -18,6 +18,12 @@ class Matrix{
     // public methods for accessing the number of rows and columns
     int getNumRows() const;
     int getNumCols() const;
+
+    // const operator() 
+    double operator()(int i, int j) const;
+    // non-const operator()
+    double& operator()(int i, int j); 
+
 };
 
 #endif
