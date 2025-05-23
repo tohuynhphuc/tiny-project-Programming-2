@@ -89,6 +89,40 @@ Vector Vector::operator-() const {
     return result;
 }
 
+// Prefix++, DOES change original vector
+Vector& Vector::operator++ (){
+    for (int i = 0; i < mSize; i++){
+        mData[i]++;
+    }
+    return *this;
+}
+
+// Postfix++, DOES change original vector, but return a copy of old version
+Vector Vector::operator++(int){
+    Vector temp = *this;    // Copy current state
+    for (int i = 0; i < mSize; i++){
+        mData[i]++;
+    }
+    return temp;
+}
+
+// Prefix--, DOES change the original vector
+Vector& Vector::operator--(){
+    for (int i = 0; i < mSize; i++){
+        mData[i]--;
+    }
+    return *this;
+}
+
+// Postfix--, DOES change the original vector, but return the old-version copy
+Vector Vector::operator--(int){
+    Vector temp = *this;    // Copy current state
+    for (int i = 0; i < mSize; i++){
+        mData[i]--;
+    }
+    return temp;
+}
+
 // Binary Operator
 // Vector ... const -> return new object
 // Vector& ...      -> assign back to current object
