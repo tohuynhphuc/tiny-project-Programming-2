@@ -8,9 +8,10 @@
 #include <sstream>
 #include <string>
 
-#include "LinearSystem.cpp"
-#include "Matrix.cpp"
-#include "Vector.cpp"
+#include "LinearSystem.h"
+#include "Matrix.h"
+#include "Vector.h"
+
 using namespace std;
 
 int main() {

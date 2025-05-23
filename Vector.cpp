@@ -90,34 +90,34 @@ Vector Vector::operator-() const {
 }
 
 // Prefix++, DOES change original vector
-Vector& Vector::operator++ (){
-    for (int i = 0; i < mSize; i++){
+Vector& Vector::operator++() {
+    for (int i = 0; i < mSize; i++) {
         mData[i]++;
     }
     return *this;
 }
 
 // Postfix++, DOES change original vector, but return a copy of old version
-Vector Vector::operator++(int){
-    Vector temp = *this;    // Copy current state
-    for (int i = 0; i < mSize; i++){
+Vector Vector::operator++(int) {
+    Vector temp = *this;  // Copy current state
+    for (int i = 0; i < mSize; i++) {
         mData[i]++;
     }
     return temp;
 }
 
 // Prefix--, DOES change the original vector
-Vector& Vector::operator--(){
-    for (int i = 0; i < mSize; i++){
+Vector& Vector::operator--() {
+    for (int i = 0; i < mSize; i++) {
         mData[i]--;
     }
     return *this;
 }
 
 // Postfix--, DOES change the original vector, but return the old-version copy
-Vector Vector::operator--(int){
-    Vector temp = *this;    // Copy current state
-    for (int i = 0; i < mSize; i++){
+Vector Vector::operator--(int) {
+    Vector temp = *this;  // Copy current state
+    for (int i = 0; i < mSize; i++) {
         mData[i]--;
     }
     return temp;
@@ -249,6 +249,7 @@ const double& Vector::operator[](int index) const {
 
     return mData[index];
 }
+
 const double& Vector::operator()(int index_1) const {
     if (index_1 < 1 || index_1 > mSize) {
         throw std::out_of_range(
@@ -260,7 +261,7 @@ const double& Vector::operator()(int index_1) const {
 }
 
 // toString
-std::string Vector::toString() {
+string Vector::toString() {
     string result = "[";
     for (int i = 0; i < mSize; i++) {
         result += to_string(mData[i]);

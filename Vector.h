@@ -23,11 +23,10 @@ class Vector {
 
     // Unary Operator
     Vector operator-() const;  // DOES NOT change original vector
-    Vector& Vector::operator++ ();  // DOES change original vector
-    Vector Vector::operator++(int);   // DOES change original vector, but return old copy
-    Vector& Vector::operator--();   // DOES change original vector
-    Vector Vector::operator--(int);   // DOES change original vector, but return old copy
-
+    Vector& operator++();      // DOES change original vector
+    Vector operator++(int);  // DOES change original vector, but return old copy
+    Vector& operator--();    // DOES change original vector
+    Vector operator--(int);  // DOES change original vector, but return old copy
 
     // Binary Operator
     // Vector ... const -> return new object
