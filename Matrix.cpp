@@ -52,7 +52,7 @@ Matrix::~Matrix(){
     delete[] mData;
 }
 
-Access to the number of rows and columns
+//Access to the number of rows and columns
 int Matrix::getNumRows() const{
     return mNumRows;
 }
