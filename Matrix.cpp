@@ -51,3 +51,12 @@ Matrix::~Matrix(){
     }
     delete[] mData;
 }
+
+Access to the number of rows and columns
+int Matrix::getNumRows() const{
+    return mNumRows;
+}
+
+int Matrix::getNumCols() const{
+    return mNumCols;
+}

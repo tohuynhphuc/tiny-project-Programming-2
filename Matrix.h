@@ -14,6 +14,10 @@ class Matrix{
     Matrix(const Matrix& other);  // Copy constructor
     // Destructor
     ~Matrix();
+
+    // public methods for accessing the number of rows and columns
+    int getNumRows() const;
+    int getNumCols() const;
 };
 
 #endif
