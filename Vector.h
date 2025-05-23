@@ -18,6 +18,8 @@ class Vector {
     // Destructor
     ~Vector();
 
+    int getSize() const;
+
     // Assignment Operator
     Vector& operator=(const Vector& other);  // DOES change original vector
 

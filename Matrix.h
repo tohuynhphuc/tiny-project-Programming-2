@@ -47,11 +47,13 @@ class Matrix {
     Matrix& operator-=(const Matrix& other);
 
     Matrix operator*(const Matrix& matrix) const;
+    Matrix& operator*=(const Matrix& matrix);
+
     Matrix operator*(const Vector& vector) const;
+    Matrix& operator*=(const Vector& vector);
+
     Matrix operator*(double scalar) const;
-    Matrix operator*=(const Matrix& matrix);
-    Matrix operator*=(const Vector& vector);
-    Matrix operator*=(double scalar);
+    Matrix& operator*=(double scalar);
 
     // Helper function: Convert a square matrix
     // to an UPPER TRIANGLE matrix

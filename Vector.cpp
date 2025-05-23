@@ -21,6 +21,7 @@ Vector::Vector(int size) {
         mData = new double[mSize]();
     }
 }
+
 Vector::Vector(double array[], int size) {
     if (!array || size <= 0) {
         Vector(0);  // if empty array, create default vector
@@ -52,6 +53,8 @@ Vector::~Vector() {
     delete[] mData;
     mSize = 0;
 }
+
+int Vector::getSize() const { return mSize; }
 
 // Assignment Operator
 // DOES change original vector
