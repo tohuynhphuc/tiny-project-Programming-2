@@ -97,9 +97,11 @@ Vector& Vector::operator=(const Vector& other) {
 //! Negative, DOES NOT change original vector
 Vector Vector::operator-() const {
     Vector result(mSize);
+
     for (int i = 0; i < mSize; i++) {
         result.mData[i] = -mData[i];
     }
+
     return result;
 }
 
@@ -108,15 +110,18 @@ Vector& Vector::operator++() {
     for (int i = 0; i < mSize; i++) {
         mData[i]++;
     }
+
     return *this;
 }
 
 //! Postfix++, DOES change original vector, but return a copy of old version
 Vector Vector::operator++(int) {
     Vector temp = *this;  // Copy current state
+
     for (int i = 0; i < mSize; i++) {
         mData[i]++;
     }
+
     return temp;
 }
 
@@ -125,15 +130,18 @@ Vector& Vector::operator--() {
     for (int i = 0; i < mSize; i++) {
         mData[i]--;
     }
+
     return *this;
 }
 
 //! Postfix--, DOES change the original vector, but return the old-version copy
 Vector Vector::operator--(int) {
     Vector temp = *this;  // Copy current state
+
     for (int i = 0; i < mSize; i++) {
         mData[i]--;
     }
+
     return temp;
 }
 
