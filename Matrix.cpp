@@ -313,11 +313,11 @@ Matrix &Matrix::operator*=(const Matrix &matrix)
 }
 
 // VECTOR MULTIPLICATION
-Matrix Matrix::operator*(const Vector &vector) const
+Vector Matrix::operator*(const Vector &vector) const
 {
     // CODE HERE mxn x nX1 = mX1
     assert(mNumCols == vector.getSize());
-    Matrix result(mNumRows, 1);
+    Vector result(mNumRows);
     for (int m = 0; m < mNumRows; m++)
     {
         double sum = 0.0;
@@ -325,7 +325,7 @@ Matrix Matrix::operator*(const Vector &vector) const
         {
             sum += mData[m][n] * vector[n];
         }
-        result.mData[m][0] = sum;
+        result[m] = sum;
     }
     return result;
     // CODE END HERE

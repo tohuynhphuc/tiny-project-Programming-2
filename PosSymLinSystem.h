@@ -3,6 +3,10 @@
 
 #include "LinearSystem.h"
 
-class PosSymLinSystem : public LinearSystem {};
+class PosSymLinSystem : public LinearSystem
+{
+public:
+    Vector Solve() const override;
+};
 
 #endif
