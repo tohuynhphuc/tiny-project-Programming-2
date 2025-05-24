@@ -22,6 +22,9 @@ class LinearSystem {
 
     // Solve using Gauss Elimination with pivoting
     virtual Vector Solve() const;
+
+    Vector SolveLeastSquares() const;
+    Vector SolveMinimunNorm() const;
 };
 
 #endif

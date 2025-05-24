@@ -369,8 +369,10 @@ double Matrix::determinant() const {
     return isPositive ? det : -det;
 }
 
+//* ----------Inverse Square Matrix----------
 Matrix Matrix::inverse() const {
-    assert(mNumRows == mNumCols);   // Must be square matrix
+    //? It MUST be a square matrix
+    assert(mNumRows == mNumCols);
 
     // Check if the matrix is invertible
     double det = this->determinant();
