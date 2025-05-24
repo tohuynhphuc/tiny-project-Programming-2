@@ -26,44 +26,52 @@ LinearSystem::LinearSystem(const LinearSystem &ls) {
 }
 
 Vector LinearSystem::Solve() const {
-    //* 1. Form augmented matrix [A | b]
+    //& 1. Form augmented matrix [A | b]
     Matrix aug(mSize, mSize + 1);  // Augmented matrix
     Vector result(mSize);          // Result vector
     for (int i = 1; i <= mSize; i++) {
         for (int j = 1; j <= mSize; j++) {
             aug(i, j) = (*mpA)(i, j);
-            aug(i, mSize + 1) = (*mpb)(i);
         }
+        aug(i, mSize + 1) = (*mpb)(i);
     }
 
-    //* 2. Forward elimination
+    //& 2. Forward elimination
     for (int i = 0; i < mSize; i++) {
         // Partial pivoting: find max row in column i
         int maxRow = i;
-        for (int k = i + 1; k < mSize; k++)
-            if (abs(aug(k + 1, i + 1)) > abs(aug(maxRow + 1, i + 1)))
+        for (int k = i + 1; k < mSize; k++) {
+            if (abs(aug(k + 1, i + 1)) > abs(aug(maxRow + 1, i + 1))) {
                 maxRow = k;
+            }
+        }
+
         // Swap rows if needed
         if (maxRow != i) {
-            for (int k = i; k <= mSize; k++)
+            for (int k = i; k <= mSize; k++) {
                 swap(aug(i + 1, k + 1), aug(maxRow + 1, k + 1));
+            }
         }
 
         // Eliminate below
         for (int j = i + 1; j < mSize; j++) {
             double factor = aug(j + 1, i + 1) / aug(i + 1, i + 1);
-            for (int k = i; k <= mSize; k++)
+
+            for (int k = i; k <= mSize; k++) {
                 aug(j + 1, k + 1) -= factor * aug(i + 1, k + 1);
+            }
         }
     }
 
     // 3. Back substitution
     for (int i = mSize - 1; i >= 0; i--) {
         result(i + 1) = aug(i + 1, mSize + 1);
-        for (int j = i + 1; j < mSize; j++)
+        for (int j = i + 1; j < mSize; j++) {
             result(i + 1) -= aug(i + 1, j + 1) * result(j + 1);
+        }
         result(i + 1) /= aug(i + 1, i + 1);
     }
+
     return result;
 }
 
