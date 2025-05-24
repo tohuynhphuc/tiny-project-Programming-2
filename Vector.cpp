@@ -1,6 +1,7 @@
 #include "Vector.h"
 
 #include <cassert>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -267,15 +268,17 @@ const double& Vector::operator()(int index_1) const {
 
 //! To String
 string Vector::toString() {
-    string result = "[";
-    for (int i = 0; i < mSize; i++) {
-        result += to_string(mData[i]);
+    ostringstream oss;
+    oss << "[";
 
-        if (i < mSize - 1) {  // if not the last element add ,
-            result += ", ";
+    for (int i = 0; i < mSize; i++) {
+        oss << fixed << setprecision(2) << mData[i];  // 2 decimal places
+
+        if (i < mSize - 1) {
+            oss << ", ";
         }
     }
-    result += "]";
 
-    return result;
+    oss << "]";
+    return oss.str();
 }

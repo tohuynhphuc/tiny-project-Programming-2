@@ -67,6 +67,9 @@ class Matrix {
 
     //* Transpose
     Matrix transposed_matrix() const;
+
+    //* To String
+    std::string toString();
 };
 
 #endif

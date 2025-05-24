@@ -168,6 +168,22 @@ int main() {
     cout << "Determinant of 5x5 identity matrix: " << m10.determinant()
          << " (Expected: 1)" << endl;
 
+    Matrix m11(3, 3);
+    m11(1, 1) = 4;
+    m11(1, 2) = 7;
+    m11(1, 3) = 2;
+    m11(2, 1) = 3;
+    m11(2, 2) = 6;
+    m11(2, 3) = 1;
+    m11(3, 1) = 2;
+    m11(3, 2) = 5;
+    m11(3, 3) = 1;
+    Matrix m12 = m11.inverse();
+    cout << "Determinant of matrix: " << m11.determinant()
+         << " and of inverse matrix: " << m12.determinant()
+         << " (Expected: 3, 1/3)" << endl;
+    cout << "Inverse: " << m12.toString() << endl;
+
     // Test LinearSystem (Gaussian elimination)
     Matrix A1(3, 3);
     A1(1, 1) = 2;

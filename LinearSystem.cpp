@@ -9,9 +9,8 @@ using namespace std;
 //* ----------Constructors----------
 //! Default Constructor
 LinearSystem::LinearSystem(Matrix *A, Vector *b) {
-    //? Must be Square matrix & vector size must match
-    assert(A->getNumCols() == A->getNumRows() &&
-           b->getSize() == A->getNumRows());
+    //? Vector size must match
+    assert(b->getSize() == A->getNumRows());
 
     mpA = A;
     mpb = b;
@@ -63,7 +62,7 @@ Vector LinearSystem::Solve() const {
         }
     }
 
-    // 3. Back substitution
+    //& 3. Back substitution
     for (int i = mSize - 1; i >= 0; i--) {
         result(i + 1) = aug(i + 1, mSize + 1);
         for (int j = i + 1; j < mSize; j++) {
@@ -90,7 +89,7 @@ Vector LinearSystem::SolveLeastSquares() const {
 Vector LinearSystem::SolveMinimunNorm() const {
     // Assume mpA is m x n, mpb is m x 1, m < n(under - determined)
     Matrix At = mpA->transposed_matrix();  // n x m
-    Matrix AAt = (*mpA) * At;      // m x m
+    Matrix AAt = (*mpA) * At;              // m x m
     Vector temp(mSize);
 
     // Solve AAt * y = b for y
