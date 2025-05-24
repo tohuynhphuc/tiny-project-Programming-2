@@ -64,6 +64,9 @@ class Matrix {
 
     //* Inverse in a square matrix
     Matrix inverse() const;
+
+    //* Transpose
+    Matrix transposed_matrix() const;
 };
 
 #endif

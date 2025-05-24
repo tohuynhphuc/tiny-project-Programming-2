@@ -376,56 +376,58 @@ Matrix Matrix::inverse() const {
 
     // Check if the matrix is invertible
     double det = this->determinant();
-    if (det == 0.0){
+    if (det == 0.0) {
         throw std::runtime_error("Matrix is singular and cannot be inverted.");
     }
     int n = mNumRows;
-    Matrix augmented(n, 2*n);
+    Matrix augmented(n, 2 * n);
 
     // Create an augmented matrix [A|I]
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-            augmented(i+1, j+1) = (*this)(i+1, j+1);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            augmented(i + 1, j + 1) = (*this)(i + 1, j + 1);
         }
-        for (int j = 0; j < n; j++){
-            augmented(i+1, j+1+n) = (i==j) ? 1.0 : 0.0;
+        for (int j = 0; j < n; j++) {
+            augmented(i + 1, j + 1 + n) = (i == j) ? 1.0 : 0.0;
         }
     }
 
     // Gauss-Jordan elimination
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
         // Find pivot
-        double pivot = augmented(i+1, i+1);
-        if (pivot == 0.0){
+        double pivot = augmented(i + 1, i + 1);
+        if (pivot == 0.0) {
             bool found = false;
-            for (int j = i+1; j < n; j++){
-                if (augmented(j+1, i+1) != 0.0){
+            for (int j = i + 1; j < n; j++) {
+                if (augmented(j + 1, i + 1) != 0.0) {
                     // Swap rows i and j
-                    for (int k = 0; k < 2*n; k++){
-                        std::swap(augmented(i+1, k+1), augmented(j+1, k+1));
+                    for (int k = 0; k < 2 * n; k++) {
+                        std::swap(augmented(i + 1, k + 1),
+                                  augmented(j + 1, k + 1));
                     }
-                    
-                    pivot = augmented(i+1, i+1);
+
+                    pivot = augmented(i + 1, i + 1);
                     found = true;
                     break;
                 }
             }
-            if (!found){
-                throw std::runtime_error("Matrix is singular and cannot be inverted!");
+            if (!found) {
+                throw std::runtime_error(
+                    "Matrix is singular and cannot be inverted!");
             }
         }
 
         // Normalize pivot row
-        for (int k = 0; k < 2*n; k++){
-            augmented(i+1, k+1) /= pivot;
+        for (int k = 0; k < 2 * n; k++) {
+            augmented(i + 1, k + 1) /= pivot;
         }
 
         // Eliminate other rows
-        for (int j = 0; j < n; j++){
-            if (j != i){
-                double factor = augmented(j+1, i+1);
-                for (int k = 0; k < 2*n; k++){
-                    augmented(j+1, k+1) -= factor* augmented(i+1, k+1);
+        for (int j = 0; j < n; j++) {
+            if (j != i) {
+                double factor = augmented(j + 1, i + 1);
+                for (int k = 0; k < 2 * n; k++) {
+                    augmented(j + 1, k + 1) -= factor * augmented(i + 1, k + 1);
                 }
             }
         }
@@ -433,11 +435,22 @@ Matrix Matrix::inverse() const {
 
     // Extract the right half of the augmented to get the inverse
     Matrix inverse(n, n);
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-            inverse(i+1, j+1) = augmented(i+1, j+1+n);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            inverse(i + 1, j + 1) = augmented(i + 1, j + 1 + n);
         }
     }
 
     return inverse;
+}
+
+//* Transpose
+Matrix Matrix::transposed_matrix() const {
+    Matrix result(mNumCols, mNumRows);
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
+            result.mData[j][i] = mData[i][j];
+        }
+    }
+    return result;
 }
