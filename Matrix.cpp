@@ -324,47 +324,47 @@ double Matrix::determinant() const {
         return mData[0][0] * mData[1][1] - mData[0][1] * mData[1][0];
     }
 
-    double det = 1.0;
     Matrix result(*this);  // Make a copy
     bool isPositive = true;
 
     for (int i = 0; i < mNumRows; i++) {
-        // Find the pivot
+        //& Find the pivot
         double pivot = result.mData[i][i];
         int swapRow = i;
 
         if (pivot == 0) {
             // Find a non-zero pivot
             for (int j = i + 1; j < mNumRows; j++) {
-                if (result.mData[j][i] != 0) {
-                    swapRow = j;
-                    break;
-                }
+                if (result.mData[j][i] == 0) continue;
+                swapRow = j;
+                break;
             }
-            if (swapRow != i) {
-                // Swap rows
-                for (int k = 0; k < mNumCols; k++) {
-                    std::swap(result.mData[i][k], result.mData[swapRow][k]);
-                }
-                isPositive = !isPositive;  // Change sign of determinant
-                pivot = result.mData[i][i];
+
+            if (swapRow == i) return 0;  // Singular matrix
+
+            // Swap rows
+            for (int k = 0; k < mNumCols; k++) {
+                swap(result.mData[i][k], result.mData[swapRow][k]);
             }
+
+            isPositive = !isPositive;  // Change sign of determinant
+            pivot = result.mData[i][i];
         }
 
-        if (pivot == 0) {
-            return 0.0;  // Singular matrix
-        }
-
-        // Eliminate below
+        //& Eliminate below
         for (int j = i + 1; j < mNumRows; j++) {
             double factor = result.mData[j][i] / pivot;
+            
             for (int k = i; k < mNumCols; k++) {
                 result.mData[j][k] -= factor * result.mData[i][k];
             }
         }
     }
+
+    double det = 1;
     for (int i = 0; i < mNumRows; i++) {
         det *= result.mData[i][i];
     }
+
     return isPositive ? det : -det;
 }

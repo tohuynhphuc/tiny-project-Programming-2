@@ -61,7 +61,8 @@ class Matrix {
 
     //* Determinant in a square matrix
     double determinant() const;
-    // Inverse in a square matrix
+
+    //* Inverse in a square matrix
     Matrix inverse() const;
 };
 
