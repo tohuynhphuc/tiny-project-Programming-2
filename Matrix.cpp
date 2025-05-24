@@ -377,7 +377,7 @@ Matrix Matrix::inverse() const {
     // Check if the matrix is invertible
     double det = this->determinant();
     if (det == 0.0) {
-        throw std::runtime_error("Matrix is singular and cannot be inverted.");
+        throw runtime_error("Matrix is singular and cannot be inverted.");
     }
     int n = mNumRows;
     Matrix augmented(n, 2 * n);
@@ -402,8 +402,7 @@ Matrix Matrix::inverse() const {
                 if (augmented(j + 1, i + 1) != 0.0) {
                     // Swap rows i and j
                     for (int k = 0; k < 2 * n; k++) {
-                        std::swap(augmented(i + 1, k + 1),
-                                  augmented(j + 1, k + 1));
+                        swap(augmented(i + 1, k + 1), augmented(j + 1, k + 1));
                     }
 
                     pivot = augmented(i + 1, i + 1);
@@ -412,7 +411,7 @@ Matrix Matrix::inverse() const {
                 }
             }
             if (!found) {
-                throw std::runtime_error(
+                throw runtime_error(
                     "Matrix is singular and cannot be inverted!");
             }
         }

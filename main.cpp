@@ -10,21 +10,19 @@
 
 #include "LinearSystem.cpp"
 #include "Matrix.cpp"
-#include "Vector.cpp"
 #include "PosSymLinSystem.cpp"
+#include "Vector.cpp"
 
 using namespace std;
 
-int main()
-{
+int main() {
     // testing Vector
     Vector v1 = Vector(3);
     double arr[] = {1, 2, 3, 4, 5, 6};
     Vector v2 = Vector(arr, 6);
     double *arr2 = (double *)calloc(6, sizeof(double));
-    for (int i = 0; i < 6; i++)
-    {
-        arr2[i] = 6 - i; // [6, 5, 4, 3, 2, 1]
+    for (int i = 0; i < 6; i++) {
+        arr2[i] = 6 - i;  // [6, 5, 4, 3, 2, 1]
     }
     Vector v3 = Vector(arr2, 6);
     cout << "v1: " << v1.toString() << endl;
@@ -37,7 +35,8 @@ int main()
     m2(1, 2) = 6;
     m2(2, 1) = 3;
     m2(2, 2) = 8;
-    std::cout << "Determinant of 2x2 matrix: " << m2.determinant() << " (Expected: 14)" << std::endl;
+    cout << "Determinant of 2x2 matrix: " << m2.determinant()
+         << " (Expected: 14)" << endl;
 
     // 3x3 matrix test
     Matrix m3(3, 3);
@@ -50,7 +49,8 @@ int main()
     m3(3, 1) = 2;
     m3(3, 2) = 8;
     m3(3, 3) = 7;
-    std::cout << "Determinant of 3x3 matrix: " << m3.determinant() << " (Expected: -306)" << std::endl;
+    cout << "Determinant of 3x3 matrix: " << m3.determinant()
+         << " (Expected: -306)" << endl;
 
     // Singular matrix test (should be 0)
     Matrix m4(2, 2);
@@ -58,7 +58,8 @@ int main()
     m4(1, 2) = 2;
     m4(2, 1) = 2;
     m4(2, 2) = 4;
-    std::cout << "Determinant of singular 2x2 matrix: " << m4.determinant() << " (Expected: 0)" << std::endl;
+    cout << "Determinant of singular 2x2 matrix: " << m4.determinant()
+         << " (Expected: 0)" << endl;
     // 4x4 matrix with mixed values
     Matrix m5(4, 4);
     m5(1, 1) = 1;
@@ -77,7 +78,8 @@ int main()
     m5(4, 2) = 1;
     m5(4, 3) = 1;
     m5(4, 4) = 2;
-    std::cout << "Determinant of 4x4 matrix: " << m5.determinant() << " (Expected: 72)" << std::endl;
+    cout << "Determinant of 4x4 matrix: " << m5.determinant()
+         << " (Expected: 72)" << endl;
 
     // 5x5 matrix with zeros and negatives
     Matrix m6(5, 5);
@@ -106,7 +108,8 @@ int main()
     m6(5, 3) = -1;
     m6(5, 4) = 1;
     m6(5, 5) = -1;
-    std::cout << "Determinant of 5x5 matrix: " << m6.determinant() << " (Expected: 19)" << std::endl;
+    cout << "Determinant of 5x5 matrix: " << m6.determinant()
+         << " (Expected: 19)" << endl;
 
     // 4x4 singular matrix (determinant should be 0)
     Matrix m7(4, 4);
@@ -126,7 +129,8 @@ int main()
     m7(4, 2) = 6;
     m7(4, 3) = 9;
     m7(4, 4) = 12;
-    std::cout << "Determinant of singular 4x4 matrix: " << m7.determinant() << " (Expected: 0)" << std::endl;
+    cout << "Determinant of singular 4x4 matrix: " << m7.determinant()
+         << " (Expected: 0)" << endl;
 
     // 4x4 Vandermonde matrix (det = (b-a)*(c-a)*(d-a)*(c-b)*(d-b)*(d-c))
     double a = 1, b = 2, c = 3, d = 4;
@@ -147,21 +151,22 @@ int main()
     m8(4, 2) = d;
     m8(4, 3) = d * d;
     m8(4, 4) = d * d * d;
-    std::cout << "Determinant of 4x4 Vandermonde matrix: " << m8.determinant() << " (Expected: 12)" << std::endl;
+    cout << "Determinant of 4x4 Vandermonde matrix: " << m8.determinant()
+         << " (Expected: 12)" << endl;
 
     // 6x6 diagonal matrix (det = product of diagonal)
     Matrix m9(6, 6);
     for (int i = 1; i <= 6; i++)
-        for (int j = 1; j <= 6; j++)
-            m9(i, j) = (i == j) ? i : 0;
-    std::cout << "Determinant of 6x6 diagonal matrix: " << m9.determinant() << " (Expected: 720)" << std::endl;
+        for (int j = 1; j <= 6; j++) m9(i, j) = (i == j) ? i : 0;
+    cout << "Determinant of 6x6 diagonal matrix: " << m9.determinant()
+         << " (Expected: 720)" << endl;
 
     // 5x5 identity matrix (det = 1)
     Matrix m10(5, 5);
     for (int i = 1; i <= 5; i++)
-        for (int j = 1; j <= 5; j++)
-            m10(i, j) = (i == j) ? 1 : 0;
-    std::cout << "Determinant of 5x5 identity matrix: " << m10.determinant() << " (Expected: 1)" << std::endl;
+        for (int j = 1; j <= 5; j++) m10(i, j) = (i == j) ? 1 : 0;
+    cout << "Determinant of 5x5 identity matrix: " << m10.determinant()
+         << " (Expected: 1)" << endl;
 
     // Test LinearSystem (Gaussian elimination)
     Matrix A1(3, 3);
@@ -180,7 +185,8 @@ int main()
 
     LinearSystem sys1(&A1, &b1);
     Vector x1 = sys1.Solve();
-    cout << "LinearSystem::Solve() solution: " << x1.toString() << " (Expected: [2, 3, -1])" << endl;
+    cout << "LinearSystem::Solve() solution: " << x1.toString()
+         << " (Expected: [2, 3, -1])" << endl;
 
     // Test PosSymLinSystem (Conjugate Gradient)
     // Test PosSymLinSystem (Conjugate Gradient)
@@ -195,6 +201,7 @@ int main()
 
     // PosSymLinSystem sys2(&A2, &b2);
     // Vector x2 = sys2.Solve();
-    // cout << "PosSymLinSystem::Solve() solution: " << x2.toString() << " (Expected: [0.090909, 0.636364])" << endl;
+    // cout << "PosSymLinSystem::Solve() solution: " << x2.toString() << "
+    // (Expected: [0.090909, 0.636364])" << endl;
     return 0;
 }
