@@ -123,7 +123,7 @@ Matrix &Matrix::operator=(const Matrix &other)
 // DOES NOT change original vector
 Matrix Matrix::operator-() const
 {
-    Matrix result(mNumRows, mNumCols); // Create a copy of matrix
+    Matrix result(mNumRows, mNumCols);
 
     for (int i = 0; i < mNumRows; i++)
     {
