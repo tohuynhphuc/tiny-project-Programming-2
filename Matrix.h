@@ -3,17 +3,18 @@
 
 #include "Vector.h"
 
-class Matrix {
-   private:
+class Matrix
+{
+private:
     int mNumRows;
     int mNumCols;
-    double** mData;
-    void allocateMemory(int rows, int cols);  // To allocate 2D array
+    double **mData;
+    void allocateMemory(int rows, int cols); // To allocate 2D array
 
-   public:
+public:
     // Constructor
-    Matrix(int rows = 1, int cols = 1);  // Zero initial matrix
-    Matrix(const Matrix& other);         // Copy constructor
+    Matrix(int rows = 1, int cols = 1); // Zero initial matrix
+    Matrix(const Matrix &other);        // Copy constructor
 
     // Destructor
     ~Matrix();
@@ -25,35 +26,35 @@ class Matrix {
     // const operator()
     double operator()(int i, int j) const;
     // non-const operator()
-    double& operator()(int i, int j);
+    double &operator()(int i, int j);
 
     // Assignment operator
-    Matrix& operator=(const Matrix& other);  // DOES change original matrix
+    Matrix &operator=(const Matrix &other); // DOES change original matrix
 
     // Unary Operator
-    Matrix operator-() const;  // DOES NOT change original matrix
-    Matrix& operator++();      // DOES change original vector
-    Matrix operator++(int);  // DOES change original vector, but return old copy
-    Matrix& operator--();    // DOES change original vector
-    Matrix operator--(int);  // DOES change original vector, but return old copy
+    Matrix operator-() const; // DOES NOT change original matrix
+    Matrix &operator++();     // DOES change original vector
+    Matrix operator++(int);   // DOES change original vector, but return old copy
+    Matrix &operator--();     // DOES change original vector
+    Matrix operator--(int);   // DOES change original vector, but return old copy
 
     // Binary Operator
     // Vector ... const -> return new object
     // Vector& ...      -> assign back to current object
-    Matrix operator+(const Matrix& other) const;
-    Matrix& operator+=(const Matrix& other);
+    Matrix operator+(const Matrix &other) const;
+    Matrix &operator+=(const Matrix &other);
 
-    Matrix operator-(const Matrix& other) const;
-    Matrix& operator-=(const Matrix& other);
+    Matrix operator-(const Matrix &other) const;
+    Matrix &operator-=(const Matrix &other);
 
-    Matrix operator*(const Matrix& matrix) const;
-    Matrix& operator*=(const Matrix& matrix);
+    Matrix operator*(const Matrix &matrix) const;
+    Matrix &operator*=(const Matrix &matrix);
 
-    Matrix operator*(const Vector& vector) const;
-    Matrix& operator*=(const Vector& vector);
+    Vector operator*(const Vector &vector) const;
+    Matrix &operator*=(const Vector &vector);
 
     Matrix operator*(double scalar) const;
-    Matrix& operator*=(double scalar);
+    Matrix &operator*=(double scalar);
 
     // Helper function: Convert a square matrix
     // to an UPPER TRIANGLE matrix
