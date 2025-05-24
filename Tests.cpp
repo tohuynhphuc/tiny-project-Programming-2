@@ -151,8 +151,14 @@ bool test9() {
 }
 
 bool test10() {
-    // NOT IMPLEMENTED
-    return true;
+    Matrix m(2, 2);
+    m(1, 1) = 7;
+    m(1, 2) = 9;
+    m(2, 1) = 5;
+    m(2, 2) = 0;
+    cout << m.toString() << endl;
+    cout << "Expected: [[7, 9], [5, 0]]\n";
+    return m(1, 1) == 7 && m(1, 2) == 9 && m(2, 1) == 5 && m(2, 2) == 0;
 }
 
 bool test11() {
