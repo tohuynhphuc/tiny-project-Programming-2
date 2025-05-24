@@ -4,6 +4,36 @@
 #include <stdexcept>
 
 using namespace std;
+
+// Transpose Matrix
+Matrix Matrix::transposed_matrix(const Matrix& other){
+    Matrix result(other.mNumCols, other.mNumRows);
+    for (int i = 0; i < other.mNumRows; i++){
+        for (int j = 0; j < other.mNumCols; j++){
+            result.mData[j][i] = other.mData[i][j];
+        }
+    }
+    return result;
+}
+
+int LinearSystem::isSymmetric(Matrix* A)const{
+    Matrix result = transposed_matrix((*A));
+    int flag = 1;
+    for (int i = 0; i < A->getNumRows(); i++){
+        for (int j = 0; j < A->getNumCols(); j++){
+            if (result.mData[i][j] != A->mData[i][j]){
+                flag = 0;
+            }
+        }
+    }
+    if (flag == 1){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+
 Vector PosSymLinSystem::Solve() const
 {
     int max_interations = 1000;
