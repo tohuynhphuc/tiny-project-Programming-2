@@ -102,9 +102,14 @@ bool test7() {
     cout << "v2 = " << v2.toString() << endl;
     cout << "v = v1 + v2\nv = " << v.toString() << endl;
     cout << "Expected: v = [5, 14, 7, 5]\n";
+    Vector vv = v;
+    vv += v2;
+    cout << "v += v2\nv= " << v.toString() << endl;
+    cout << "Expected: v = [8, 22, 10, 7]\n";
     //! TODO: ADD +=
 
-    return v(1) == 5 && v(2) == 14 && v(3) == 7 && v(4) == 5;
+    return v(1) == 5 && v(2) == 14 && v(3) == 7 && v(4) == 5 && vv(1) == 8 &&
+           vv(2) == 22 && vv(3) == 10 && vv(4) == 7;
 }
 
 bool test8() {
@@ -119,11 +124,13 @@ bool test8() {
     cout << "v2 = " << v2.toString() << endl;
     cout << "v = v1 + v2\nv = " << v.toString() << endl;
     cout << "Expected: v = [-1, -2, 1, 1]\n";
-    v -= v2;
-    cout << "v -= v2\nv =  " << v.toString() << endl;
+    Vector vv = v;
+    vv -= v2;
+    cout << "v -= v2\nv =  " << vv.toString() << endl;
     cout << "Expected: v = [-4, -10, -2, -1]\n";
 
-    return v(1) == -4 && v(2) == -10 && v(3) == -2 && v(4) == -1;
+    return v(1) == -1 && v(2) == -2 && v(3) == 1 && v(4) == 1 && vv(1) == -4 &&
+           vv(2) == -10 && vv(3) == -2 && vv(4) == -1;
 }
 
 bool test9() {

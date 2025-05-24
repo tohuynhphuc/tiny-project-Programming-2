@@ -13,9 +13,9 @@
 [x] 6. -- : Prefix, Postfix
 
 ### Binary Operators
-[ ] 7. Addition
-[ ] 8. Subtraction
-[ ] 9. Dot Product
+[x] 7. Addition
+[x] 8. Subtraction
+[x] 9. Dot Product
 
 ## 2. Matrix
 

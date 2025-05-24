@@ -1,6 +1,7 @@
 #include "Vector.h"
 
 #include <cassert>
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -272,7 +273,13 @@ string Vector::toString() {
     oss << "[";
 
     for (int i = 0; i < mSize; i++) {
-        oss << fixed << setprecision(2) << mData[i];  // 2 decimal places
+        double val = mData[i];
+        if (fabs(val - round(val)) < 1e-9) {
+            oss << static_cast<int>(round(val));  // Print as int
+        } else {
+            oss << fixed << setprecision(2)
+                << val;  // Print as double with 2 decimal places
+        }
 
         if (i < mSize - 1) {
             oss << ", ";

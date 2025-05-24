@@ -1,6 +1,7 @@
 #include "Matrix.h"
 
 #include <cassert>
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -464,7 +465,13 @@ string Matrix::toString() {
     for (int i = 0; i < mNumRows; ++i) {
         oss << "[";
         for (int j = 0; j < mNumCols; ++j) {
-            oss << fixed << setprecision(2) << mData[i][j];  // 2 decimal places
+            double val = mData[i][j];
+            if (fabs(val - round(val)) < 1e-9) {
+                oss << static_cast<int>(round(val));  // Print as int
+            } else {
+                oss << fixed << setprecision(2)
+                    << val;  // Print as double with 2 decimal places
+            }
             if (j < mNumCols - 1) {
                 oss << ", ";
             }
