@@ -3,9 +3,13 @@
 
 #include "LinearSystem.h"
 
-class PosSymLinSystem : public LinearSystem {
-   public:
-    int isSymmetric(const Matrix& A) const;
+class PosSymLinSystem : public LinearSystem
+{
+public:
+    // Constructor
+    PosSymLinSystem(Matrix *A, Vector *b) : LinearSystem(A, b) {}
+
+    int isSymmetric(const Matrix &A) const;
     Vector Solve() const override;
 };
 
