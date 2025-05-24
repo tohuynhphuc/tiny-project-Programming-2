@@ -141,13 +141,13 @@ bool test9() {
     double data2[] = {3, 8, 3, 2};
     Vector v2(data2, 4);
     double v = v1 * v2;
-    cout << "v1 = " << v1.toString() << endl;
+    v1 *= 5;
+    cout << "5 * v1 = " << v1.toString() << endl;
     cout << "v2 = " << v2.toString() << endl;
-    cout << "v = " << v << endl;
-    cout << "Expected: v = [-1, -2, 1, 1]\n";
+    cout << "v = v1 * v2 = " << v << endl;
+    cout << "Expected: v1 = [10, 30, 20, 15]; v = 72\n";
 
-    return true;
-    // v(1) == -1 && v(2) == -2 && v(3) == 1 && v(4) == 1;
+    return v1(1) == 10 && v1(2) == 30 && v1(3) == 20 && v1(4) == 15 && v == 72;
 }
 
 bool test10() {

@@ -15,7 +15,7 @@
 ### Binary Operators
 [x] 7. Addition
 [x] 8. Subtraction
-[x] 9. Dot Product
+[x] 9. Dot Product & Scalar Multiplication
 
 ## 2. Matrix
 

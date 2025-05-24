@@ -21,7 +21,7 @@ void Matrix::allocateMemory(int rows, int cols) {
 }
 
 //* ----------Constructors----------
-//! Default Constructor
+//! Size Constructor
 Matrix::Matrix(int rows, int cols) {
     //? Matrix dimensions must be positive
     assert(rows > 0 && cols > 0);
@@ -34,6 +34,22 @@ Matrix::Matrix(int rows, int cols) {
     for (int i = 0; i < mNumRows; i++) {
         for (int j = 0; j < mNumCols; j++) {
             mData[i][j] = 0.0;
+        }
+    }
+}
+
+//! Array Constructor
+Matrix::Matrix(int rows, int cols, double **data) {
+    //? Matrix dimensions must be positive
+    assert(rows > 0 && cols > 0);
+
+    mNumRows = rows;
+    mNumCols = cols;
+    allocateMemory(mNumRows, mNumCols);
+
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
+            mData[i][j] = data[i][j];
         }
     }
 }
@@ -88,7 +104,7 @@ Matrix &Matrix::operator=(const Matrix &other) {
         return *this;
     }
 
-    for (int i = 0; i < this->mNumRows; i++) {
+    for (int i = 0; i < mNumRows; i++) {
         delete[] mData[i];
     }
     delete[] mData;
@@ -96,12 +112,12 @@ Matrix &Matrix::operator=(const Matrix &other) {
     allocateMemory(other.getNumRows(), other.getNumCols());
 
     // copy data over
-    this->mNumRows = other.getNumRows();
-    this->mNumCols = other.getNumCols();
+    mNumRows = other.getNumRows();
+    mNumCols = other.getNumCols();
 
-    for (int i = 0; i < this->mNumRows; i++) {
-        for (int j = 0; j < this->mNumCols; j++) {
-            this->mData[i][j] = other.mData[i][j];
+    for (int i = 0; i < mNumRows; i++) {
+        for (int j = 0; j < mNumCols; j++) {
+            mData[i][j] = other.mData[i][j];
         }
     }
 
