@@ -15,7 +15,7 @@ class Matrix {
     //* Constructors
     Matrix(int rows = 1, int cols = 1);  // Size constructor
     //! NOT IMPLEMENTED
-    Matrix(int rows, int cols, double **data);  // Array constructor
+    Matrix(double **data, int rows, int cols);  // Array constructor
     Matrix(const Matrix &other);                // Copy constructor
 
     //* Destructor

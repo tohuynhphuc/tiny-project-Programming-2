@@ -39,7 +39,7 @@ Matrix::Matrix(int rows, int cols) {
 }
 
 //! Array Constructor
-Matrix::Matrix(int rows, int cols, double **data) {
+Matrix::Matrix(double **data, int rows, int cols) {
     //? Matrix dimensions must be positive
     assert(rows > 0 && cols > 0);
 

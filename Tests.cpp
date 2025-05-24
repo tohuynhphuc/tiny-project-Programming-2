@@ -17,6 +17,7 @@ bool test1() {
     v(1) = 3;
     v(2) = 1;
     v(3) = 4;
+
     cout << v.toString() << endl;
     cout << "Expected: [3, 1, 4]\n";
 
@@ -28,6 +29,7 @@ bool test2() {
 
     double data[] = {1, 5, 9};
     Vector v(data, 3);
+
     cout << v.toString() << endl;
     cout << "Expected: [1, 5, 9]\n";
 
@@ -40,6 +42,7 @@ bool test3() {
     double data[] = {2, 6, 5};
     Vector v1(data, 3);
     Vector v2(v1);
+
     cout << "v1 = " << v1.toString() << endl;
     cout << "v2 = " << v2.toString() << endl;
     cout << "Expected: v1 == v2\n";
@@ -53,6 +56,7 @@ bool test4() {
     double data[] = {3, 5, 8, 9};
     Vector v(data, 4);
     Vector v1 = -v;
+
     cout << "v1 = " << v1.toString() << endl;
     cout << "v = " << v.toString() << endl;
     cout << "Expected: v1 = [-3, -5, -8, -9]\n";
@@ -67,6 +71,7 @@ bool test5() {
     Vector v(data, 5);
     Vector v1 = ++v;
     Vector v2 = v++;
+
     cout << "v1 = " << v1.toString() << endl;
     cout << "v2 = " << v2.toString() << endl;
     cout << "v = " << v.toString() << endl;
@@ -82,6 +87,7 @@ bool test6() {
     Vector v(data, 3);
     Vector v1 = --v;
     Vector v2 = v--;
+
     cout << "v1 = " << v1.toString() << endl;
     cout << "v2 = " << v2.toString() << endl;
     cout << "v = " << v.toString() << endl;
@@ -98,15 +104,15 @@ bool test7() {
     double data2[] = {3, 8, 3, 2};
     Vector v2(data2, 4);
     Vector v = v1 + v2;
+    Vector vv = v;
+    vv += v2;
+
     cout << "v1 = " << v1.toString() << endl;
     cout << "v2 = " << v2.toString() << endl;
     cout << "v = v1 + v2\nv = " << v.toString() << endl;
     cout << "Expected: v = [5, 14, 7, 5]\n";
-    Vector vv = v;
-    vv += v2;
     cout << "v += v2\nv= " << v.toString() << endl;
     cout << "Expected: v = [8, 22, 10, 7]\n";
-    //! TODO: ADD +=
 
     return v(1) == 5 && v(2) == 14 && v(3) == 7 && v(4) == 5 && vv(1) == 8 &&
            vv(2) == 22 && vv(3) == 10 && vv(4) == 7;
@@ -120,12 +126,13 @@ bool test8() {
     double data2[] = {3, 8, 3, 2};
     Vector v2(data2, 4);
     Vector v = v1 - v2;
+    Vector vv = v;
+    vv -= v2;
+
     cout << "v1 = " << v1.toString() << endl;
     cout << "v2 = " << v2.toString() << endl;
     cout << "v = v1 + v2\nv = " << v.toString() << endl;
     cout << "Expected: v = [-1, -2, 1, 1]\n";
-    Vector vv = v;
-    vv -= v2;
     cout << "v -= v2\nv =  " << vv.toString() << endl;
     cout << "Expected: v = [-4, -10, -2, -1]\n";
 
@@ -151,29 +158,57 @@ bool test9() {
 }
 
 bool test10() {
+    cout << YELLOW << "TEST 10" << RESET << "\n";
+
     Matrix m(2, 2);
     m(1, 1) = 7;
     m(1, 2) = 9;
     m(2, 1) = 5;
     m(2, 2) = 0;
+
     cout << m.toString() << endl;
     cout << "Expected: [[7, 9], [5, 0]]\n";
+
     return m(1, 1) == 7 && m(1, 2) == 9 && m(2, 1) == 5 && m(2, 2) == 0;
 }
 
 bool test11() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 11" << RESET << "\n";
+
+    double data[2][2] = {{2, 8}, {8, 4}};
+    Matrix m(data, 2, 2);
+
+    cout << m.toString() << endl;
+    cout << "Expected: [[2, 8], [8, 4]]\n";
+
+    return m(1, 1) == 2 && m(1, 2) == 8 && m(2, 1) == 8 && m(2, 2) == 4;
 }
 
 bool test12() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 12" << RESET << "\n";
+
+    Matrix m1(2, 2);
+    double data[2][2] = {{1, 9}, {7, 1}};
+    Matrix m(m1);
+
+    cout << m.toString() << endl;
+    cout << "Expected: [[1, 9], [7, 1]]\n";
+
+    return m(1, 1) == 1 && m(1, 2) == 9 && m(2, 1) == 7 && m(2, 2) == 1;
 }
 
 bool test13() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 13" << RESET << "\n";
+
+    double data[2][2] = {{3, 5}, {8, 9}};
+    Vector v(data, 2, 2);
+    Vector v1 = -v;
+
+    cout << "v1 = " << v1.toString() << endl;
+    cout << "v = " << v.toString() << endl;
+    cout << "Expected: v1 = [-3, -5, -8, -9]\n";
+
+    return v1(1) == -3 && v1(2) == -5 && v1(3) == -8 && v1(4) == -9;
 }
 
 bool test14() {

@@ -20,9 +20,9 @@
 ## 2. Matrix
 
 ### Constructors
-[ ] 10. Size Constructor
-[ ] 11. Array Constructor
-[ ] 12. Copy Constructor
+[x] 10. Size Constructor
+[x] 11. Array Constructor
+[x] 12. Copy Constructor
 
 ### Unary Operators
 [ ] 13. Negative
