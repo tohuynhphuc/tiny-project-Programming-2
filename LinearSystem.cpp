@@ -78,7 +78,7 @@ Vector LinearSystem::Solve() const {
 
 // Over - determined
 Vector LinearSystem::SolveLeastSquares() const {
-    Matrix At = mpA->transposed_matrix();
+    Matrix At = mpA->transpose();
     Matrix AtA = At * (*mpA);
     Vector Atb = At * (*mpb);
     // Solve the normal equations AtA * x = Atb
@@ -88,8 +88,8 @@ Vector LinearSystem::SolveLeastSquares() const {
 
 Vector LinearSystem::SolveMinimunNorm() const {
     // Assume mpA is m x n, mpb is m x 1, m < n(under - determined)
-    Matrix At = mpA->transposed_matrix();  // n x m
-    Matrix AAt = (*mpA) * At;              // m x m
+    Matrix At = mpA->transpose();  // n x m
+    Matrix AAt = (*mpA) * At;      // m x m
     Vector temp(mSize);
 
     // Solve AAt * y = b for y

@@ -13,8 +13,10 @@ class Matrix {
 
    public:
     //* Constructors
-    Matrix(int rows = 1, int cols = 1);  // Size input
-    Matrix(const Matrix &other);         // Copy constructor
+    Matrix(int rows = 1, int cols = 1);  // Size constructor
+    //! NOT IMPLEMENTED
+    Matrix(int rows, int cols, double **data);  // Array constructor
+    Matrix(const Matrix &other);                // Copy constructor
 
     //* Destructor
     ~Matrix();
@@ -66,7 +68,7 @@ class Matrix {
     Matrix inverse() const;
 
     //* Transpose
-    Matrix transposed_matrix() const;
+    Matrix transpose() const;
 
     //* To String
     std::string toString();

@@ -445,7 +445,7 @@ Matrix Matrix::inverse() const {
 }
 
 //* Transpose
-Matrix Matrix::transposed_matrix() const {
+Matrix Matrix::transpose() const {
     Matrix result(mNumCols, mNumRows);
 
     for (int i = 0; i < mNumRows; i++) {

@@ -7,7 +7,7 @@
 using namespace std;
 
 int PosSymLinSystem::isSymmetric(const Matrix& A) const {
-    Matrix result(A.transposed_matrix());
+    Matrix result(A.transpose());
     int flag = 1;
     for (int i = 0; i < A.getNumRows(); i++) {
         for (int j = 0; j < A.getNumCols(); j++) {
