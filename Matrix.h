@@ -67,6 +67,9 @@ class Matrix {
     //* Inverse in a square matrix
     Matrix inverse() const;
 
+	//* Pseudo Inverse in a non-square matrix
+	Matrix pseudoInverse() const;
+
     //* Transpose
     Matrix transpose() const;
 
