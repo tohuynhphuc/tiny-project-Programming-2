@@ -26,19 +26,17 @@ LinearSystem::LinearSystem(const LinearSystem &ls) {
 }
 
 Vector LinearSystem::Solve() const {
-    // The cols here is the number of variables
-    // Check the size of the vector
-    // 1. Form augmented matrix [A | b]
+    //* 1. Form augmented matrix [A | b]
     Matrix aug(mSize, mSize + 1);  // Augmented matrix
     Vector result(mSize);          // Result vector
-    for (int i = 0; i < mSize; i++) {
-        for (int j = 0; j < mSize; j++) {
-            aug(i + 1, j + 1) = (*mpA)(i + 1, j + 1);
-            aug(i + 1, mSize + 1) = (*mpb)(i + 1);
+    for (int i = 1; i <= mSize; i++) {
+        for (int j = 1; j <= mSize; j++) {
+            aug(i, j) = (*mpA)(i, j);
+            aug(i, mSize + 1) = (*mpb)(i);
         }
     }
 
-    // 2. Forward elimination
+    //* 2. Forward elimination
     for (int i = 0; i < mSize; i++) {
         // Partial pivoting: find max row in column i
         int maxRow = i;

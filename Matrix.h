@@ -22,7 +22,7 @@ class Matrix {
     //* Getters
     int getNumRows() const;
     int getNumCols() const;
-    double **Matrix::getData() const;
+    double **getData() const;
 
     //* Brackets ()
     const double &operator()(int i, int j) const;

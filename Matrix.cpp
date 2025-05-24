@@ -354,7 +354,7 @@ double Matrix::determinant() const {
         //& Eliminate below
         for (int j = i + 1; j < mNumRows; j++) {
             double factor = result.mData[j][i] / pivot;
-            
+
             for (int k = i; k < mNumCols; k++) {
                 result.mData[j][k] -= factor * result.mData[i][k];
             }
