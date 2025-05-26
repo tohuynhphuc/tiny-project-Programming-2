@@ -175,7 +175,9 @@ bool test10() {
 bool test11() {
     cout << YELLOW << "TEST 11" << RESET << "\n";
 
-    double data[2][2] = {{2, 8}, {8, 4}};
+    double** data = new double*[2];
+    data[0] = new double[2]{2, 8};
+    data[1] = new double[2]{8, 4};
     Matrix m(data, 2, 2);
 
     cout << m.toString() << endl;
@@ -183,12 +185,58 @@ bool test11() {
 
     return m(1, 1) == 2 && m(1, 2) == 8 && m(2, 1) == 8 && m(2, 2) == 4;
 }
+/*
+
+cout << YELLOW << "TEST 9" << RESET << "\n";
+
+    // 2x3 pseudo-inverse matrix test
+    Matrix m3(2, 3);
+    m3(1, 1) = 5;
+    m3(1, 2) = -8;
+    m3(1, 3) = 2;
+    m3(2, 1) = 0;
+    m3(2, 2) = 7;
+    m3(2, 3) = -2;
+    cout << "Pseudo-inverse of m3: " << m3.pseudoInverse().toString() << endl;
+    cout << "Expected: [[0.199398043641836, 0.225733634311512]," << endl;
+    cout << "	[−0.00300978179082, 0.128668171557562]," << endl;
+    cout << "	[−0.010534236267871, −0.049661399548533]]" << endl;
+
+    // 5x3 pseudo-inverse matrix test
+    Matrix m4(5, 3);
+    m4(1, 1) = 5;
+    m4(1, 2) = -8;
+    m4(1, 3) = 2;
+    m4(2, 1) = 0;
+    m4(2, 2) = 7;
+    m4(2, 3) = -2;
+    m4(3, 1) = 2;
+    m4(3, 2) = 9;
+    m4(3, 3) = -3;
+    m4(4, 1) = -4;
+    m4(4, 2) = -1;
+    m4(4, 3) = 8;
+    m4(5, 1) = 0;
+    m4(5, 2) = 0;
+    m4(5, 3) = -3;
+    cout << "Pseudo-inverse of m4: " << m4.pseudoInverse().toString() << endl;
+    cout << "Expected: [[0.148736738954454, 0.030732961242952,
+0.107139306662122, -0.010509422975871, -0.056495249456776]," << endl; cout << "
+[−0.005879596097312, 0.045457514947524, 0.073813074290259, 0.02955704202349,
+-0.029219036257509]," << endl; cout << "	[0.064249499382216,
+0.020169570959908, 0.053308337948958, 0.10696604320225, -0.07201227046142]]" <<
+endl;
+
+    return true;
+*/
 
 bool test12() {
     cout << YELLOW << "TEST 12" << RESET << "\n";
 
-    Matrix m1(2, 2);
-    double data[2][2] = {{1, 9}, {7, 1}};
+    double** data = new double*[2];
+    data[0] = new double[2]{1, 9};
+    data[1] = new double[2]{7, 1};
+    Matrix m1(data, 2, 2);
     Matrix m(m1);
 
     cout << m.toString() << endl;
@@ -200,25 +248,53 @@ bool test12() {
 bool test13() {
     cout << YELLOW << "TEST 13" << RESET << "\n";
 
-    double data[2][2] = {{3, 5}, {8, 9}};
-    Vector v(data, 2, 2);
-    Vector v1 = -v;
+    double** data = new double*[2];
+    data[0] = new double[2]{3, 5};
+    data[1] = new double[2]{8, 9};
+    Matrix m(data, 2, 2);
+    Matrix m1 = -m;
 
-    cout << "v1 = " << v1.toString() << endl;
-    cout << "v = " << v.toString() << endl;
-    cout << "Expected: v1 = [-3, -5, -8, -9]\n";
+    cout << "m1 = \n" << m1.toString() << endl;
+    cout << "m = \n" << m.toString() << endl;
+    cout << "Expected: m1 = [[-3, -5], [-8, -9]]\n";
 
-    return v1(1) == -3 && v1(2) == -5 && v1(3) == -8 && v1(4) == -9;
+    return m1(1, 1) == -3 && m1(1, 2) == -5 && m1(2, 1) == -8 && m1(2, 2) == -9;
 }
 
 bool test14() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 14" << RESET << "\n";
+
+    double** data = new double*[2];
+    data[0] = new double[2]{7, 9};
+    data[1] = new double[2]{3, 2};
+    Matrix m(data, 2, 2);
+    Matrix m1 = ++m;
+    Matrix m2 = m++;
+
+    cout << "m1 = \n" << m1.toString() << endl;
+    cout << "m2 = \n" << m2.toString() << endl;
+    cout << "m = \n" << m.toString() << endl;
+    cout << "Expected: m1 = m2 = [[8, 10], [4, 3]]; v = [[9, 11], [5, 4]]\n";
+
+    return m1(1, 1) == 8 && m2(1, 1) == 8 && m(1, 1) == 9;
 }
 
 bool test15() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 15" << RESET << "\n";
+
+    double** data = new double*[2];
+    data[0] = new double[2]{7, 9};
+    data[1] = new double[2]{3, 2};
+    Matrix m(data, 2, 2);
+    Matrix m1 = --m;
+    Matrix m2 = m--;
+
+    cout << "m1 = \n" << m1.toString() << endl;
+    cout << "m2 = \n" << m2.toString() << endl;
+    cout << "m = \n" << m.toString() << endl;
+    cout << "Expected: m1 = m2 = [[6, 8], [2, 1]]; v = [[5, 7], [1, 0]]\n";
+
+    return m1(1, 1) == 6 && m2(1, 1) == 6 && m(1, 1) == 5;
 }
 
 bool test16() {

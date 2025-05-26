@@ -3,56 +3,56 @@
 ## 1. Vector
 
 ### Constructors
-[x] 1. Size Constructor
-[x] 2. Array Constructor
-[x] 3. Copy Constructor
+- [x] 1. Size Constructor
+- [x] 2. Array Constructor
+- [x] 3. Copy Constructor
 
 ### Unary Operators
-[x] 4. Negative
-[x] 5. ++ : Prefix, Postfix
-[x] 6. -- : Prefix, Postfix
+- [x] 4. Negative
+- [x] 5. ++ : Prefix, Postfix
+- [x] 6. -- : Prefix, Postfix
 
 ### Binary Operators
-[x] 7. Addition
-[x] 8. Subtraction
-[x] 9. Dot Product & Scalar Multiplication
+- [x] 7. Addition
+- [x] 8. Subtraction
+- [x] 9. Dot Product & Scalar Multiplication
 
 ## 2. Matrix
 
 ### Constructors
-[x] 10. Size Constructor
-[x] 11. Array Constructor
-[x] 12. Copy Constructor
+- [x] 10. Size Constructor
+- [x] 11. Array Constructor
+- [x] 12. Copy Constructor
 
 ### Unary Operators
-[ ] 13. Negative
-[ ] 14. ++ : Prefix, Postfix
-[ ] 15. -- : Prefix, Postfix
+- [x] 13. Negative
+- [x] 14. ++ : Prefix, Postfix
+- [x] 15. -- : Prefix, Postfix
 
 ### Binary Operators
-[ ] 16. Addition
-[ ] 17. Subtraction
-[ ] 18. Matrix Multiplication
-[ ] 19. Vector Multiplication
-[ ] 20. Scalar Multiplication
+- [ ] 16. Addition
+- [ ] 17. Subtraction
+- [ ] 18. Matrix Multiplication
+- [ ] 19. Vector Multiplication
+- [ ] 20. Scalar Multiplication
 
 ### Others
-[ ] 21. Determinant
-[ ] 22. Inverse
-[ ] 23. Transpose
+- [ ] 21. Determinant
+- [ ] 22. Inverse
+- [ ] 23. Transpose
 
 ## 3. Linear System
 
 ### Constructors
-[ ] 24. Default Constructor
-[ ] 25. Copy Constructor
+- [ ] 24. Default Constructor
+- [ ] 25. Copy Constructor
 
 ### Solve
-[ ] 26. Solve
-[ ] 27. Solve Least Squares
-[ ] 28. Solve Minimum Norm
+- [ ] 26. Solve
+- [ ] 27. Solve Least Squares
+- [ ] 28. Solve Minimum Norm
 
 ## 4. Positive Symmetric Linear System
 
-[ ] 29. Is Symmetric
-[ ] 30. Solve
+- [ ] 29. Is Symmetric
+- [ ] 30. Solve
