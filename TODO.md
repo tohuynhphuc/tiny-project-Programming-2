@@ -30,11 +30,11 @@
 - [x] 15. -- : Prefix, Postfix
 
 ### Binary Operators
-- [ ] 16. Addition
-- [ ] 17. Subtraction
-- [ ] 18. Matrix Multiplication
-- [ ] 19. Vector Multiplication
-- [ ] 20. Scalar Multiplication
+- [x] 16. Addition
+- [x] 17. Subtraction
+- [x] 18. Matrix Multiplication
+- [x] 19. Vector Multiplication
+- [x] 20. Scalar Multiplication
 
 ### Others
 - [ ] 21. Determinant

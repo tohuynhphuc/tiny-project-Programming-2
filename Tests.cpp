@@ -274,7 +274,7 @@ bool test14() {
     cout << "m1 = \n" << m1.toString() << endl;
     cout << "m2 = \n" << m2.toString() << endl;
     cout << "m = \n" << m.toString() << endl;
-    cout << "Expected: m1 = m2 = [[8, 10], [4, 3]]; v = [[9, 11], [5, 4]]\n";
+    cout << "Expected: m1 = m2 = [[8, 10], [4, 3]]; m = [[9, 11], [5, 4]]\n";
 
     return m1(1, 1) == 8 && m2(1, 1) == 8 && m(1, 1) == 9;
 }
@@ -292,39 +292,139 @@ bool test15() {
     cout << "m1 = \n" << m1.toString() << endl;
     cout << "m2 = \n" << m2.toString() << endl;
     cout << "m = \n" << m.toString() << endl;
-    cout << "Expected: m1 = m2 = [[6, 8], [2, 1]]; v = [[5, 7], [1, 0]]\n";
+    cout << "Expected: m1 = m2 = [[6, 8], [2, 1]]; m = [[5, 7], [1, 0]]\n";
 
     return m1(1, 1) == 6 && m2(1, 1) == 6 && m(1, 1) == 5;
 }
 
 bool test16() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 16" << RESET << "\n";
+
+    double** data1 = new double*[2];
+    data1[0] = new double[2]{10, 10};
+    data1[1] = new double[2]{10, 10};
+    Matrix m1(data1, 2, 2);
+
+    double** data2 = new double*[2];
+    data2[0] = new double[2]{1, 2};
+    data2[1] = new double[2]{3, 5};
+    Matrix m2(data2, 2, 2);
+    Matrix m3 = m1 + m2;
+    Matrix m4 = m1;
+    m4 += m2;
+
+    cout << "m3 = \n" << m3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
+    cout << "Expected: m3 = m4 = [[11, 12], [13, 15]]\n";
+
+    return m3(1, 1) == 11 && m3(1, 2) == 12 && m3(2, 1) == 13 &&
+           m3(2, 2) == 15 && m4(1, 1) == 11 && m4(1, 2) == 12 &&
+           m4(2, 1) == 13 && m4(2, 2) == 15;
 }
 
 bool test17() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 17" << RESET << "\n";
+
+    double** data1 = new double*[2];
+    data1[0] = new double[2]{10, 10};
+    data1[1] = new double[2]{10, 10};
+    Matrix m1(data1, 2, 2);
+
+    double** data2 = new double*[2];
+    data2[0] = new double[2]{1, 2};
+    data2[1] = new double[2]{3, 5};
+    Matrix m2(data2, 2, 2);
+    Matrix m3 = m1 - m2;
+    Matrix m4 = m1;
+    m4 -= m2;
+
+    cout << "m3 = \n" << m3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
+    cout << "Expected: m3 = m4 = [[9, 8], [7, 5]]\n";
+
+    return m3(1, 1) == 9 && m3(1, 2) == 8 && m3(2, 1) == 7 && m3(2, 2) == 5 &&
+           m4(1, 1) == 9 && m4(1, 2) == 8 && m4(2, 1) == 7 && m4(2, 2) == 5;
 }
 
 bool test18() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 18" << RESET << "\n";
+
+    double** data1 = new double*[2];
+    data1[0] = new double[2]{2, 4};
+    data1[1] = new double[2]{6, 8};
+    Matrix m1(data1, 2, 2);
+
+    double** data2 = new double*[2];
+    data2[0] = new double[2]{1, 2};
+    data2[1] = new double[2]{3, 5};
+    Matrix m2(data2, 2, 2);
+    Matrix m3 = m1 * m2;
+    Matrix m4 = m1;
+    m4 *= m2;
+
+    cout << "m3 = \n" << m3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
+    cout << "Expected: m3 = m4 = [[14, 24], [30, 52]]\n";
+
+    return m3(1, 1) == 14 && m3(1, 2) == 24 && m3(2, 1) == 30 &&
+           m3(2, 2) == 52 && m4(1, 1) == 14 && m4(1, 2) == 24 &&
+           m4(2, 1) == 30 && m4(2, 2) == 52;
 }
 
 bool test19() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 19" << RESET << "\n";
+
+    double** data1 = new double*[2];
+    data1[0] = new double[2]{2, 4};
+    data1[1] = new double[2]{6, 8};
+    Matrix m1(data1, 2, 2);
+
+    double data2[] = {5, 10};
+    Vector v(data2, 2);
+    Vector v3 = m1 * v;
+    Matrix m4 = m1;
+    m4 *= v;
+
+    cout << "v3 = \n" << v3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
+    cout << "Expected: v3 = m4 = [50, 110]\n";
+
+    return v3(1) == 50 && v3(2) == 110 && m4(1, 1) == 50 && m4(2, 1) == 110 &&
+           m4.getNumCols() == 1 && m4.getNumRows() == 2;
 }
 
 bool test20() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 18" << RESET << "\n";
+
+    double** data1 = new double*[2];
+    data1[0] = new double[2]{1, 2};
+    data1[1] = new double[2]{3, 5};
+    Matrix m1(data1, 2, 2);
+    double k = 1.5;
+    Matrix m2 = m1 * k;
+    Matrix m3 = m1;
+    m3 *= k;
+
+    cout << "m2 = \n" << m2.toString() << endl;
+    cout << "m3 = \n" << m3.toString() << endl;
+    cout << "Expected: m2 = m3 = [[1.5, 3], [4.5, 7.5]]\n";
+
+    return m2(1, 1) == 1.5 && m2(1, 2) == 3 && m2(2, 1) == 4.5 &&
+           m2(2, 2) == 7.5 && m3(1, 1) == 1.5 && m3(1, 2) == 3 &&
+           m3(2, 1) == 4.5 && m3(2, 2) == 7.5;
 }
 
 bool test21() {
-    // NOT IMPLEMENTED
-    return true;
+    double** data1 = new double*[4];
+    data1[0] = new double[4]{3, 1, 4, 1};
+    data1[1] = new double[4]{5, 9, 2, 6};
+    data1[2] = new double[4]{5, 3, 5, 8};
+    data1[3] = new double[4]{9, 7, 9, 3};
+    Matrix m1(data1, 4, 4);
+    float d = m1.determinant();
+    cout << "det (\n" << m1.toString() << "\n) = " << d << "\n";
+    cout << "Expected: 98\n";
+    return d == 98;
 }
 
 bool test22() {
