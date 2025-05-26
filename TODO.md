@@ -37,9 +37,9 @@
 - [x] 20. Scalar Multiplication
 
 ### Others
-- [ ] 21. Determinant
-- [ ] 22. Inverse
-- [ ] 23. Transpose
+- [x] 21. Determinant
+- [x] 22. Inverse
+- [x] 23. Transpose
 
 ## 3. Linear System
 

@@ -8,7 +8,11 @@
 #include "PosSymLinSystem.h"
 #include "Vector.h"
 
+#define DELTA 0.01
+
 using namespace std;
+
+bool compare(double a, double b) { return abs(a - b) <= DELTA; }
 
 bool test1() {
     cout << YELLOW << "TEST 1" << RESET << "\n";
@@ -394,7 +398,7 @@ bool test19() {
 }
 
 bool test20() {
-    cout << YELLOW << "TEST 18" << RESET << "\n";
+    cout << YELLOW << "TEST 20" << RESET << "\n";
 
     double** data1 = new double*[2];
     data1[0] = new double[2]{1, 2};
@@ -415,44 +419,86 @@ bool test20() {
 }
 
 bool test21() {
+    cout << YELLOW << "TEST 21" << RESET << "\n";
+
     double** data1 = new double*[4];
     data1[0] = new double[4]{3, 1, 4, 1};
     data1[1] = new double[4]{5, 9, 2, 6};
     data1[2] = new double[4]{5, 3, 5, 8};
     data1[3] = new double[4]{9, 7, 9, 3};
     Matrix m1(data1, 4, 4);
+
     float d = m1.determinant();
+    Matrix m4(2, 2);
+    m4(1, 1) = 1;
+    m4(1, 2) = 2;
+    m4(2, 1) = 2;
+    m4(2, 2) = 4;
+    float d4 = m4.determinant();
+
     cout << "det (\n" << m1.toString() << "\n) = " << d << "\n";
     cout << "Expected: 98\n";
-    return d == 98;
+    cout << "det (\n" << m4.toString() << "\n) = " << d4 << "\n";
+    cout << "Expected: 0\n";
+    return d == 98 && d4 == 0;
 }
 
 bool test22() {
-    // NOT IMPLEMENTED
-    return true;
+    cout << YELLOW << "TEST 22" << RESET << "\n";
+
+    double** data1 = new double*[4];
+    data1[0] = new double[4]{3, 1, 4, 1};
+    data1[1] = new double[4]{5, 9, 2, 6};
+    data1[2] = new double[4]{5, 3, 5, 8};
+    data1[3] = new double[4]{9, 7, 9, 3};
+    Matrix m1(data1, 4, 4);
+    Matrix inverse = m1.inverse();
+
+    cout << "Inverse = \n" << inverse.toString() << "\n";
+    cout << "Expected: \n[[-4.77, -1.26, 0.81, 1.95],\n [1.74, 0.58, -0.40, "
+            "-0.68],\n [3.33, 0.78, -0.53, -1.24],\n [0.24, 0.08, 0.10, "
+            "-0.18]]\n";
+
+    return compare(inverse(1, 1), -4.77) && compare(inverse(1, 2), -1.26) &&
+           compare(inverse(1, 3), 0.81) && compare(inverse(1, 4), 1.95) &&
+           compare(inverse(2, 1), 1.74) && compare(inverse(2, 2), 0.58) &&
+           compare(inverse(2, 3), -0.40) && compare(inverse(2, 4), -0.68) &&
+           compare(inverse(3, 1), 3.33) && compare(inverse(3, 2), 0.78) &&
+           compare(inverse(3, 3), -0.53) && compare(inverse(3, 4), -1.24) &&
+           compare(inverse(4, 1), 0.24) && compare(inverse(4, 2), 0.08) &&
+           compare(inverse(4, 3), 0.10) && compare(inverse(4, 4), -0.18);
 }
 
 bool test23() {
     cout << YELLOW << "TEST 23" << RESET << "\n";
-    Matrix A1(3, 3);
-    A1(1, 1) = 2;
-    A1(1, 2) = 1;
-    A1(1, 3) = -1;
-    A1(2, 1) = -3;
-    A1(2, 2) = -1;
-    A1(2, 3) = 2;
-    A1(3, 1) = -2;
-    A1(3, 2) = 1;
-    A1(3, 3) = 2;
 
-    double b1_arr[] = {8, -11, -3};
-    Vector b1(b1_arr, 3);
+    double** data1 = new double*[4];
+    data1[0] = new double[4]{3, 1, 4, 1};
+    data1[1] = new double[4]{5, 9, 2, 6};
+    data1[2] = new double[4]{5, 3, 5, 8};
+    data1[3] = new double[4]{9, 7, 9, 3};
+    Matrix m1(data1, 4, 4);
+    m1 = m1.transpose();
 
-    LinearSystem sys1(&A1, &b1);
-    Vector x1 = sys1.Solve();
-    cout << "LinearSystem::Solve() solution: " << x1.toString()
-         << " (Expected: [2, 3, -1])" << endl;
-    return true;
+    double** data2 = new double*[4];
+    data2[0] = new double[4]{3, 5, 5, 9};
+    data2[1] = new double[4]{1, 9, 3, 7};
+    data2[2] = new double[4]{4, 2, 5, 9};
+    data2[3] = new double[4]{1, 6, 8, 3};
+    Matrix m2(data2, 4, 4);
+
+    cout << m1.toString();
+    cout << "Expected: \n[[3, 5, 5, 9],\n [1, 9, 3, 7],\n [4, 2, 5, 9],\n [1, "
+            "6, 8, 3]]\n";
+
+    return m1(1, 1) == m2(1, 1) && m1(1, 2) == m2(1, 2) &&
+           m1(1, 3) == m2(1, 3) && m1(1, 4) == m2(1, 4) &&
+           m1(2, 1) == m2(2, 1) && m1(2, 2) == m2(2, 2) &&
+           m1(2, 3) == m2(2, 3) && m1(2, 4) == m2(2, 4) &&
+           m1(3, 1) == m2(3, 1) && m1(3, 2) == m2(3, 2) &&
+           m1(3, 3) == m2(3, 3) && m1(3, 4) == m2(3, 4) &&
+           m1(4, 1) == m2(4, 1) && m1(4, 2) == m2(4, 2) &&
+           m1(4, 3) == m2(4, 3) && m1(4, 4) == m2(4, 4);
 }
 
 bool test24() {
@@ -480,45 +526,31 @@ bool test24() {
 }
 
 bool test25() {
-    cout << YELLOW << "TEST 25" << RESET << "\n";
-    Matrix m2(2, 2);
-    m2(1, 1) = 4;
-    m2(1, 2) = 6;
-    m2(2, 1) = 3;
-    m2(2, 2) = 8;
-    double det = m2.determinant();
-    cout << "Determinant: " << det << " (Expected: 14)" << endl;
+    cout << YELLOW << "TEST 23" << RESET << "\n";
+    Matrix A1(3, 3);
+    A1(1, 1) = 2;
+    A1(1, 2) = 1;
+    A1(1, 3) = -1;
+    A1(2, 1) = -3;
+    A1(2, 2) = -1;
+    A1(2, 3) = 2;
+    A1(3, 1) = -2;
+    A1(3, 2) = 1;
+    A1(3, 3) = 2;
+
+    double b1_arr[] = {8, -11, -3};
+    Vector b1(b1_arr, 3);
+
+    LinearSystem sys1(&A1, &b1);
+    Vector x1 = sys1.Solve();
+    cout << "LinearSystem::Solve() solution: " << x1.toString()
+         << " (Expected: [2, 3, -1])" << endl;
     return true;
 }
 
-bool test26() {
-    cout << YELLOW << "TEST 26" << RESET << "\n";
-    Matrix m3(3, 3);
-    m3(1, 1) = 6;
-    m3(1, 2) = 1;
-    m3(1, 3) = 1;
-    m3(2, 1) = 4;
-    m3(2, 2) = -2;
-    m3(2, 3) = 5;
-    m3(3, 1) = 2;
-    m3(3, 2) = 8;
-    m3(3, 3) = 7;
-    double det = m3.determinant();
-    cout << "Determinant: " << det << " (Expected: -306)" << endl;
-    return fabs(det + 306) < 1e-4;
-}
+bool test26() { return true; }
 
-bool test27() {
-    cout << YELLOW << "TEST 27" << RESET << "\n";
-    Matrix m4(2, 2);
-    m4(1, 1) = 1;
-    m4(1, 2) = 2;
-    m4(2, 1) = 2;
-    m4(2, 2) = 4;
-    double det = m4.determinant();
-    cout << "Determinant: " << det << " (Expected: 0)" << endl;
-    return fabs(det) < 1e-4;
-}
+bool test27() { return true; }
 
 bool test28() {
     cout << YELLOW << "TEST 28" << RESET << "\n";

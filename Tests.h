@@ -13,6 +13,8 @@
 #define CYAN "\033[36m"
 #define WHITE "\033[37m"
 
+bool compare(double a, double b);
+
 bool test1();
 bool test2();
 bool test3();
