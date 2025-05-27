@@ -1,14 +1,15 @@
 # Linear System and Regression Project
 
 ## Group Members
-1. Nguyễn Hà Khải 10423053
-2. Tô Huỳnh Phúc 10423093
-3. Nguyễn Duy Khánh 10423056
-4. Đào Gia Hưng 10423048
-5. Trần Ninh Nhật Minh 10423077
-6. Ninh Hoàng Quân 10423097
+1. 10423048 - Đào Gia Hưng
+2. 10423053 - Nguyễn Hà Khải
+3. 10423056 - Nguyễn Duy Khánh
+4. 10423077 - Trần Ninh Nhật Minh
+5. 10423093 - Tô Huỳnh Phúc
+6. 10423097 - Ninh Hoàng Quân
 
-## Major: CSE2023  
+## Major: CSE2023
+
 ## Class: Programming 2  
 
 ## Project Overview
