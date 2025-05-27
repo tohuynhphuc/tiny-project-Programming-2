@@ -1,6 +1,9 @@
 #include "Tests.h"
 
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
 #include <iostream>
 
 #include "LinearSystem.h"
@@ -14,8 +17,7 @@ using namespace std;
 
 bool compare(double a, double b) { return abs(a - b) <= DELTA; }
 
-bool test1()
-{
+bool test1() {
     cout << YELLOW << "TEST 1" << RESET << "\n";
 
     Vector v(3);
@@ -29,8 +31,7 @@ bool test1()
     return v(1) == 3 && v(2) == 1 && v(3) == 4;
 }
 
-bool test2()
-{
+bool test2() {
     cout << YELLOW << "TEST 2" << RESET << "\n";
 
     double data[] = {1, 5, 9};
@@ -42,8 +43,7 @@ bool test2()
     return v(1) == 1 && v(2) == 5 && v(3) == 9;
 }
 
-bool test3()
-{
+bool test3() {
     cout << YELLOW << "TEST 3" << RESET << "\n";
 
     double data[] = {2, 6, 5};
@@ -57,8 +57,7 @@ bool test3()
     return v2(1) == 2 && v2(2) == 6 && v2(3) == 5;
 }
 
-bool test4()
-{
+bool test4() {
     cout << YELLOW << "TEST 4" << RESET << "\n";
 
     double data[] = {3, 5, 8, 9};
@@ -72,8 +71,7 @@ bool test4()
     return v1(1) == -3 && v1(2) == -5 && v1(3) == -8 && v1(4) == -9;
 }
 
-bool test5()
-{
+bool test5() {
     cout << YELLOW << "TEST 5" << RESET << "\n";
 
     double data[] = {7, 9, 3, 2, 3};
@@ -89,8 +87,7 @@ bool test5()
     return v1(1) == 8 && v2(1) == 8 && v(1) == 9;
 }
 
-bool test6()
-{
+bool test6() {
     cout << YELLOW << "TEST 6" << RESET << "\n";
 
     double data[] = {8, 4, 6};
@@ -106,8 +103,7 @@ bool test6()
     return v1(1) == 7 && v2(1) == 7 && v(1) == 6;
 }
 
-bool test7()
-{
+bool test7() {
     cout << YELLOW << "TEST 7" << RESET << "\n";
 
     double data1[] = {2, 6, 4, 3};
@@ -129,8 +125,7 @@ bool test7()
            vv(2) == 22 && vv(3) == 10 && vv(4) == 7;
 }
 
-bool test8()
-{
+bool test8() {
     cout << YELLOW << "TEST 8" << RESET << "\n";
 
     double data1[] = {2, 6, 4, 3};
@@ -152,8 +147,7 @@ bool test8()
            vv(2) == -10 && vv(3) == -2 && vv(4) == -1;
 }
 
-bool test9()
-{
+bool test9() {
     cout << YELLOW << "TEST 9" << RESET << "\n";
 
     double data1[] = {2, 6, 4, 3};
@@ -170,8 +164,7 @@ bool test9()
     return v1(1) == 10 && v1(2) == 30 && v1(3) == 20 && v1(4) == 15 && v == 72;
 }
 
-bool test10()
-{
+bool test10() {
     cout << YELLOW << "TEST 10" << RESET << "\n";
 
     Matrix m(2, 2);
@@ -186,8 +179,7 @@ bool test10()
     return m(1, 1) == 7 && m(1, 2) == 9 && m(2, 1) == 5 && m(2, 2) == 0;
 }
 
-bool test11()
-{
+bool test11() {
     cout << YELLOW << "TEST 11" << RESET << "\n";
 
     double **data = new double *[2];
@@ -245,8 +237,7 @@ endl;
     return true;
 */
 
-bool test12()
-{
+bool test12() {
     cout << YELLOW << "TEST 12" << RESET << "\n";
 
     double **data = new double *[2];
@@ -261,8 +252,7 @@ bool test12()
     return m(1, 1) == 1 && m(1, 2) == 9 && m(2, 1) == 7 && m(2, 2) == 1;
 }
 
-bool test13()
-{
+bool test13() {
     cout << YELLOW << "TEST 13" << RESET << "\n";
 
     double **data = new double *[2];
@@ -271,17 +261,14 @@ bool test13()
     Matrix m(data, 2, 2);
     Matrix m1 = -m;
 
-    cout << "m1 = \n"
-         << m1.toString() << endl;
-    cout << "m = \n"
-         << m.toString() << endl;
+    cout << "m1 = \n" << m1.toString() << endl;
+    cout << "m = \n" << m.toString() << endl;
     cout << "Expected: m1 = [[-3, -5], [-8, -9]]\n";
 
     return m1(1, 1) == -3 && m1(1, 2) == -5 && m1(2, 1) == -8 && m1(2, 2) == -9;
 }
 
-bool test14()
-{
+bool test14() {
     cout << YELLOW << "TEST 14" << RESET << "\n";
 
     double **data = new double *[2];
@@ -291,19 +278,15 @@ bool test14()
     Matrix m1 = ++m;
     Matrix m2 = m++;
 
-    cout << "m1 = \n"
-         << m1.toString() << endl;
-    cout << "m2 = \n"
-         << m2.toString() << endl;
-    cout << "m = \n"
-         << m.toString() << endl;
+    cout << "m1 = \n" << m1.toString() << endl;
+    cout << "m2 = \n" << m2.toString() << endl;
+    cout << "m = \n" << m.toString() << endl;
     cout << "Expected: m1 = m2 = [[8, 10], [4, 3]]; m = [[9, 11], [5, 4]]\n";
 
     return m1(1, 1) == 8 && m2(1, 1) == 8 && m(1, 1) == 9;
 }
 
-bool test15()
-{
+bool test15() {
     cout << YELLOW << "TEST 15" << RESET << "\n";
 
     double **data = new double *[2];
@@ -313,19 +296,15 @@ bool test15()
     Matrix m1 = --m;
     Matrix m2 = m--;
 
-    cout << "m1 = \n"
-         << m1.toString() << endl;
-    cout << "m2 = \n"
-         << m2.toString() << endl;
-    cout << "m = \n"
-         << m.toString() << endl;
+    cout << "m1 = \n" << m1.toString() << endl;
+    cout << "m2 = \n" << m2.toString() << endl;
+    cout << "m = \n" << m.toString() << endl;
     cout << "Expected: m1 = m2 = [[6, 8], [2, 1]]; m = [[5, 7], [1, 0]]\n";
 
     return m1(1, 1) == 6 && m2(1, 1) == 6 && m(1, 1) == 5;
 }
 
-bool test16()
-{
+bool test16() {
     cout << YELLOW << "TEST 16" << RESET << "\n";
 
     double **data1 = new double *[2];
@@ -341,10 +320,8 @@ bool test16()
     Matrix m4 = m1;
     m4 += m2;
 
-    cout << "m3 = \n"
-         << m3.toString() << endl;
-    cout << "m4 = \n"
-         << m4.toString() << endl;
+    cout << "m3 = \n" << m3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
     cout << "Expected: m3 = m4 = [[11, 12], [13, 15]]\n";
 
     return m3(1, 1) == 11 && m3(1, 2) == 12 && m3(2, 1) == 13 &&
@@ -352,8 +329,7 @@ bool test16()
            m4(2, 1) == 13 && m4(2, 2) == 15;
 }
 
-bool test17()
-{
+bool test17() {
     cout << YELLOW << "TEST 17" << RESET << "\n";
 
     double **data1 = new double *[2];
@@ -369,18 +345,15 @@ bool test17()
     Matrix m4 = m1;
     m4 -= m2;
 
-    cout << "m3 = \n"
-         << m3.toString() << endl;
-    cout << "m4 = \n"
-         << m4.toString() << endl;
+    cout << "m3 = \n" << m3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
     cout << "Expected: m3 = m4 = [[9, 8], [7, 5]]\n";
 
     return m3(1, 1) == 9 && m3(1, 2) == 8 && m3(2, 1) == 7 && m3(2, 2) == 5 &&
            m4(1, 1) == 9 && m4(1, 2) == 8 && m4(2, 1) == 7 && m4(2, 2) == 5;
 }
 
-bool test18()
-{
+bool test18() {
     cout << YELLOW << "TEST 18" << RESET << "\n";
 
     double **data1 = new double *[2];
@@ -396,10 +369,8 @@ bool test18()
     Matrix m4 = m1;
     m4 *= m2;
 
-    cout << "m3 = \n"
-         << m3.toString() << endl;
-    cout << "m4 = \n"
-         << m4.toString() << endl;
+    cout << "m3 = \n" << m3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
     cout << "Expected: m3 = m4 = [[14, 24], [30, 52]]\n";
 
     return m3(1, 1) == 14 && m3(1, 2) == 24 && m3(2, 1) == 30 &&
@@ -407,8 +378,7 @@ bool test18()
            m4(2, 1) == 30 && m4(2, 2) == 52;
 }
 
-bool test19()
-{
+bool test19() {
     cout << YELLOW << "TEST 19" << RESET << "\n";
 
     double **data1 = new double *[2];
@@ -422,18 +392,15 @@ bool test19()
     Matrix m4 = m1;
     m4 *= v;
 
-    cout << "v3 = \n"
-         << v3.toString() << endl;
-    cout << "m4 = \n"
-         << m4.toString() << endl;
+    cout << "v3 = \n" << v3.toString() << endl;
+    cout << "m4 = \n" << m4.toString() << endl;
     cout << "Expected: v3 = m4 = [50, 110]\n";
 
     return v3(1) == 50 && v3(2) == 110 && m4(1, 1) == 50 && m4(2, 1) == 110 &&
            m4.getNumCols() == 1 && m4.getNumRows() == 2;
 }
 
-bool test20()
-{
+bool test20() {
     cout << YELLOW << "TEST 20" << RESET << "\n";
 
     double **data1 = new double *[2];
@@ -445,10 +412,8 @@ bool test20()
     Matrix m3 = m1;
     m3 *= k;
 
-    cout << "m2 = \n"
-         << m2.toString() << endl;
-    cout << "m3 = \n"
-         << m3.toString() << endl;
+    cout << "m2 = \n" << m2.toString() << endl;
+    cout << "m3 = \n" << m3.toString() << endl;
     cout << "Expected: m2 = m3 = [[1.5, 3], [4.5, 7.5]]\n";
 
     return m2(1, 1) == 1.5 && m2(1, 2) == 3 && m2(2, 1) == 4.5 &&
@@ -456,8 +421,7 @@ bool test20()
            m3(2, 1) == 4.5 && m3(2, 2) == 7.5;
 }
 
-bool test21()
-{
+bool test21() {
     cout << YELLOW << "TEST 21" << RESET << "\n";
 
     double **data1 = new double *[4];
@@ -475,17 +439,14 @@ bool test21()
     m4(2, 2) = 4;
     float d4 = m4.determinant();
 
-    cout << "det (\n"
-         << m1.toString() << "\n) = " << d << "\n";
+    cout << "det (\n" << m1.toString() << "\n) = " << d << "\n";
     cout << "Expected: 98\n";
-    cout << "det (\n"
-         << m4.toString() << "\n) = " << d4 << "\n";
+    cout << "det (\n" << m4.toString() << "\n) = " << d4 << "\n";
     cout << "Expected: 0\n";
     return d == 98 && d4 == 0;
 }
 
-bool test22()
-{
+bool test22() {
     cout << YELLOW << "TEST 22" << RESET << "\n";
 
     double **data1 = new double *[4];
@@ -496,8 +457,7 @@ bool test22()
     Matrix m1(data1, 4, 4);
     Matrix inverse = m1.inverse();
 
-    cout << "Inverse = \n"
-         << inverse.toString() << "\n";
+    cout << "Inverse = \n" << inverse.toString() << "\n";
     cout << "Expected: \n[[-4.77, -1.26, 0.81, 1.95],\n [1.74, 0.58, -0.40, "
             "-0.68],\n [3.33, 0.78, -0.53, -1.24],\n [0.24, 0.08, 0.10, "
             "-0.18]]\n";
@@ -512,8 +472,7 @@ bool test22()
            compare(inverse(4, 3), 0.10) && compare(inverse(4, 4), -0.18);
 }
 
-bool test23()
-{
+bool test23() {
     cout << YELLOW << "TEST 23" << RESET << "\n";
 
     double **data1 = new double *[4];
@@ -546,8 +505,7 @@ bool test23()
            m1(4, 3) == m2(4, 3) && m1(4, 4) == m2(4, 4);
 }
 
-bool test24()
-{
+bool test24() {
     cout << YELLOW << "TEST 24" << RESET << "\n";
 
     double **data1 = new double *[2];
@@ -562,10 +520,8 @@ bool test24()
     dataOutput[2] = new double[2]{0.04, 0.07};
     Matrix expectedOutput(dataOutput, 3, 2);
 
-    cout << "Pseudo-Inverse = \n"
-         << inverse.toString() << "\n";
-    cout << "Expected: \n"
-         << expectedOutput.toString() << "\n";
+    cout << "Pseudo-Inverse = \n" << inverse.toString() << "\n";
+    cout << "Expected: \n" << expectedOutput.toString() << "\n";
 
     return compare(inverse(1, 1), expectedOutput(1, 1)) &&
            compare(inverse(1, 2), expectedOutput(1, 2)) &&
@@ -575,8 +531,7 @@ bool test24()
            compare(inverse(3, 2), expectedOutput(3, 2));
 }
 
-bool test25()
-{
+bool test25() {
     cout << YELLOW << "TEST 25" << RESET << "\n";
 
     Matrix A1(3, 3);
@@ -598,11 +553,11 @@ bool test25()
     Vector x1 = sys2.Solve();
 
     cout << "Solution: " << x1.toString() << "\nExpected: [2, 3, -1]" << endl;
+
     return compare(x1(1), 2) && compare(x1(2), 3) && compare(x1(3), -1);
 }
 
-bool test26()
-{
+bool test26() {
     cout << YELLOW << "TEST 26" << RESET << "\n";
 
     double **data1 = new double *[3];
@@ -617,12 +572,12 @@ bool test26()
     LinearSystem sys(&A, &b);
     Vector x = sys.Solve();  // redirects to SolveLeastSquare()
 
-    cout << "Solution: " << x.toString() << "\nExpected: [0.85, -0.72]" << endl;
+    cout << "Solution: " << x.toString() << "\nExpected: [0.85, -0.72]\n";
+
     return compare(x(1), 0.85) && compare(x(2), -0.72);
 }
 
-bool test27()
-{
+bool test27() {
     cout << YELLOW << "TEST 27" << RESET << "\n";
 
     double **data1 = new double *[1];
@@ -635,13 +590,12 @@ bool test27()
     LinearSystem sys(&A, &b);
     Vector x = sys.Solve();  // redirects to SolveMinimumNorm()
 
-    cout << "Solution: " << x.toString() << "\nExpected: [0.07, 0.14, 0.21]"
-         << endl;
+    cout << "Solution: " << x.toString() << "\nExpected: [0.07, 0.14, 0.21]\n";
+
     return compare(x(1), 0.07) && compare(x(2), 0.14) && compare(x(3), 0.21);
 }
 
-bool test28()
-{
+bool test28() {
     cout << YELLOW << "TEST 28" << RESET << "\n";
     Matrix A_spd(2, 2);
     A_spd(1, 1) = 4;
@@ -653,19 +607,17 @@ bool test28()
     Vector b_spd(b_spd_arr, 2);
 
     PosSymLinSystem sys_spd(&A_spd, &b_spd);
-
-    cout << sys_spd.isSymmetric() << endl;
-
     Vector x_spd = sys_spd.Solve();
 
     cout << "x = " << x_spd.toString() << "\nExpected: [0.09, 0.64]\n";
+
     return compare(x_spd(1), 0.09) && compare(x_spd(2), 0.63);
 }
 
 bool test29() {
     cout << YELLOW << "TEST 29" << RESET << "\n";
 
-    double** data = new double*[3];
+    double **data = new double *[4];
     data[0] = new double[3]{25, 15, -5};
     data[1] = new double[3]{15, 18, 0};
     data[2] = new double[3]{-5, 0, 11};
@@ -676,13 +628,107 @@ bool test29() {
 
     PosSymLinSystem sys(&A, &b);
     Vector x = sys.Solve();
+
     cout << "x = " << x.toString() << "\nExpected: [0.34, 0.27, 1.52]\n";
 
-    return true;
+    return compare(x(1), 0.34) && compare(x(2), 0.27) && compare(x(3), 1.52);
 }
 
-bool test30()
-{
-    cout << YELLOW << "TEST 30 " << RESET << "\n";
+bool test30() {
+    // Extract data from .data file
+    ifstream file("machine.data");  // Open the dataset file
+    string line;
+    Matrix A(209, 6);  // Create a 209x6 matrix to store predictive attributes
+    double arr[209];   // Create an array to hold PRP values
+    int rows =
+        1;  // Start row indexing from 1 (matches your Matrix indexing logic)
+    int cols = 1;  // Start column indexing from 1
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string value;
+
+        int count6predattris =
+            0;  // Track how many of the six attributes we've processed
+        int ignore1st2 = 0;  // Skip vendor name and model name
+        int loops = 0;       // Ensure we only process up to the PRP column
+
+        while (getline(ss, value, ',') && loops < 9) {
+            if (ignore1st2 < 2) {
+                ignore1st2++;
+                loops++;
+                continue;  // Skip vendor and model
+            }
+
+            if (count6predattris <
+                6) {  // Store predictive attributes into the matrix
+                A(rows, cols) = stoi(value);
+                cols++;
+                count6predattris++;
+                loops++;
+                continue;
+            }
+
+            arr[rows - 1] = stoi(value);  // Store PRP into the array
+            loops++;
+        }
+
+        cols = 1;  // Reset column for next row
+        rows++;
+    }
+
+    Vector b(arr, 209);  // Convert the array to a Vector
+    file.close();        // Clean up
+
+    // Split the data randomly. Ratio 80 : 20
+    Matrix A_train(167, 6);
+    Vector b_train(167);
+    Matrix A_test(42, 6);
+    Vector b_test(42);
+    srand(time(0));  // seed the random number. Make it random everytime we run
+                     // the program
+    int ate0Percent = 0;        // count until 167 (80%)
+    int tu0Percent = 0;         // count until 42 (20%)
+    int currentRows_train = 1;  // For () in matrix
+    int currentRows_test = 1;
+    for (int i = 1; i <= 209; i++) {
+        int ratio = rand() % 10;
+        if (ratio < 8 && ate0Percent <= 167) {
+            for (int j = 1; j <= 6; j++)
+                A_train(currentRows_train, j) = A(i, j);
+            b_train(currentRows_train) = b(i);
+            currentRows_train++;
+            ate0Percent++;
+        } else if (tu0Percent <= 42) {
+            for (int j = 1; j <= 6; j++) A_test(currentRows_test, j) = A(i, j);
+            b_test(currentRows_test) = b(i);
+            currentRows_test++;
+            tu0Percent++;
+        }
+        // if either set is full, fill the other
+    }
+
+    // Solve for x;
+    LinearSystem system(&A_train, &b_train);
+    Vector result = system.SolveLeastSquares();  // Solve the normal equations
+
+    // Now calculate RMSE
+    double sumSquaredError = 0.0;
+    for (int i = 1; i <= 42; i++) {
+        double predicted = 0.0;
+        for (int j = 1; j <= 6; j++) {
+            predicted += A_test(i, j) * result(j);
+        }
+        double error = b_test(i) - predicted;
+        sumSquaredError += error * error;
+    }
+    double RMSE = sqrt(sumSquaredError / 42);
+
+    // Print result
+
+    cout << "RMSE: " << RMSE << endl;
+    for (int i = 1; i <= result.getSize(); i++) {
+        cout << result(i) << endl;
+    }
     return true;
 }

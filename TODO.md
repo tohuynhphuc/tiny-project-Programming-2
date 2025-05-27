@@ -48,9 +48,14 @@
 - [x] 25. Constructors + Solve
 
 ### Solve
-- [x] 26. Solve Least Squares
-- [x] 27. Solve Minimum Norm
+- [x] 26. Solve Least Squares (over-determined)
+- [x] 27. Solve Minimum Norm (under-determined)
 
 ## 4. Positive Symmetric Linear System
 
-- [ ] 30. Solve
+- [x] 28. Solve
+- [x] 29. Solve
+
+# PART B
+
+- [ ] 30. Solve Part B

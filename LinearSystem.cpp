@@ -14,7 +14,7 @@ LinearSystem::LinearSystem(Matrix *A, Vector *b) {
 
     mpA = A;
     mpb = b;
-    mSize = A->getNumRows();
+    mSize = b->getSize();
 }
 
 //! Copy Constructor
@@ -24,6 +24,7 @@ LinearSystem::LinearSystem(const LinearSystem &ls) {
     mSize = ls.mSize;
 }
 
+//* ----------Solve----------
 Vector LinearSystem::Solve() const {
     //& Check when not square matrix
     if (mpA->getNumRows() > mpA->getNumCols()) {
@@ -77,6 +78,7 @@ Vector LinearSystem::Solve() const {
         }
         result(i + 1) /= aug(i + 1, i + 1);
     }
+    cout << "I GOT  THREE";
 
     return result;
 }
@@ -84,7 +86,7 @@ Vector LinearSystem::Solve() const {
 //* ----------Over-determined----------
 Vector LinearSystem::SolveLeastSquares() const {
     //? Rows > Col
-    assert(mpA->getNumRows() >= mpA->getNumCols());
+    assert(mpA->getNumRows() > mpA->getNumCols());
 
     Matrix At = mpA->transpose();
     Matrix AtA = At * (*mpA);
@@ -98,7 +100,7 @@ Vector LinearSystem::SolveLeastSquares() const {
 //* ----------Under-determined----------
 Vector LinearSystem::SolveMinimumNorm() const {
     //? Rows < Col
-    assert(mpA->getNumRows() <= mpA->getNumCols());
+    assert(mpA->getNumRows() < mpA->getNumCols());
 
     Matrix At = mpA->transpose();
     Matrix AAt = (*mpA) * At;

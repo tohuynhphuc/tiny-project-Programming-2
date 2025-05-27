@@ -20,9 +20,10 @@ class LinearSystem {
     //! Copy Constructor
     LinearSystem(const LinearSystem &ls);
 
-    // Solve using Gauss Elimination with pivoting
+    //* Solve using Gauss Elimination with pivoting
     virtual Vector Solve() const;
 
+    //* Ill-posed problem
     Vector SolveLeastSquares() const;
     Vector SolveMinimumNorm() const;
 };

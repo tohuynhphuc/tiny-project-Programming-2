@@ -8,18 +8,14 @@
 
 using namespace std;
 
-bool PosSymLinSystem::isSymmetric() const
-{
+bool PosSymLinSystem::isSymmetric() const {
     Matrix A = *mpA;
     Matrix result(A.transpose());
     int flag = 1;
 
-    for (int i = 1; i <= A.getNumRows(); i++)
-    {
-        for (int j = 1; j <= A.getNumCols(); j++)
-        {
-            if (result(i, j) != A(i, j))
-            {
+    for (int i = 1; i <= A.getNumRows(); i++) {
+        for (int j = 1; j <= A.getNumCols(); j++) {
+            if (result(i, j) != A(i, j)) {
                 flag = 0;
             }
         }
@@ -28,31 +24,23 @@ bool PosSymLinSystem::isSymmetric() const
     return flag;
 }
 
-bool PosSymLinSystem::isPositiveDefinite() const
-{
-    if (!isSymmetric())
-    {
-        cout << "!Symmetric" << endl;
-        return 0;
-    }
+bool PosSymLinSystem::isPositiveDefinite() const {
+    if (!isSymmetric()) return false;
+
     Matrix A = *mpA;
-    int first_pivot = A(1, 1); // Get the first pivot;
-    for (int i = 1; i <= mSize; i++)
-    {
+    int first_pivot = A(1, 1);  // Get the first pivot;
+
+    for (int i = 1; i <= mSize; i++) {
         Matrix sub_matrix = Matrix(i, i);
-        for (int j = 1; j <= i; j++)
-        {
-            for (int k = 1; k <= i; k++)
-            {
+        for (int j = 1; j <= i; j++) {
+            for (int k = 1; k <= i; k++) {
                 sub_matrix(j, k) = A(j, k);
             }
         }
 
-        cout << "sub Matrix" << sub_matrix.toString() << endl;
-
-        if (sub_matrix.determinant() < 0)
-            return 0;
+        if (sub_matrix.determinant() < 0) return false;
     }
+
     return true;
 }
 
@@ -66,28 +54,26 @@ Vector PosSymLinSystem::Solve() const {
 
     int max_interations = 1000;
     double tolerance = 1e-10;
-    Vector x(mSize);              // Initialize the [0, 0, ..., 0] vector
-    Vector r = *mpb - (*mpA) * x; // Initial residual
+    Vector x(mSize);               // Initialize the [0, 0, ..., 0] vector
+    Vector r = *mpb - (*mpA) * x;  // Initial residual
     // r0 = b - Ax
-    Vector p = r; // p0 = r0
+    Vector p = r;  // p0 = r0
 
-    double rsOld = r * r; // Initial residual squared
+    double rsOld = r * r;  // Initial residual squared
 
-    for (int i = 0; i < max_interations; i++)
-    {
-        Vector Ap = (*mpA) * p; // Compute Ap
+    for (int i = 0; i < max_interations; i++) {
+        Vector Ap = (*mpA) * p;  // Compute Ap
         double alpha = rsOld / (p * Ap);
 
         // Update solution
         x = x + p * alpha;
         // Update residual
         Vector rNext = r - Ap * alpha;
-        double rsNew = rNext * rNext; // New residual squared
+        double rsNew = rNext * rNext;  // New residual squared
 
         // Check convergence
-        if (rsNew < tolerance * tolerance)
-        {
-            break; // Converged
+        if (rsNew < tolerance * tolerance) {
+            break;  // Converged
         }
 
         // Update p
