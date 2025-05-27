@@ -746,8 +746,6 @@ bool test30() {
     // Print result
 
     cout << "RMSE: " << RMSE << endl;
-    for (int i = 1; i <= result.getSize(); i++) {
-        cout << result(i) << endl;
-    }
+    cout << "RESULT: " << result.toString() << "\n";
     return true;
 }

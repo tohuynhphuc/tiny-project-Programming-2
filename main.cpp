@@ -32,8 +32,8 @@ void testing() {
         } else {
             cout << RED << "Test " << (i + 1) << " failed" << RESET;
         }
+        cout << "\n\n";
     }
-    cout << "\n\n";
 
     if (testsPassed == TESTS_COUNT) {
         cout << GREEN;
