@@ -64,4 +64,4 @@ In Part B, you will apply linear regression to predict relative CPU performance 
 
 ## License
 
-This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU v3 GENERAL PUBLIC LICENSE - see the [LICENSE](LICENSE) file for details.
