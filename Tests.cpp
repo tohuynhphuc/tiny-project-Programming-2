@@ -18,7 +18,7 @@ using namespace std;
 bool compare(double a, double b) { return abs(a - b) <= DELTA; }
 
 bool test1() {
-    cout << YELLOW << "TEST 1" << RESET << "\n";
+    cout << CYAN << "PART A\n\n" << YELLOW << "TEST 1" << RESET << "\n";
 
     Vector v(3);
     v(1) = 3;
@@ -635,93 +635,112 @@ bool test29() {
 }
 
 bool test30() {
+    cout << CYAN << "PART B\n\n" << YELLOW << "TEST 30" << RESET << "\n";
+
     // Extract data from .data file
     ifstream file("machine.data");  // Open the dataset file
     string line;
-    Matrix A(209, 6);  // Create a 209x6 matrix to store predictive attributes
-    double arr[209];   // Create an array to hold PRP values
-    int rows =
-        1;  // Start row indexing from 1 (matches your Matrix indexing logic)
-    int cols = 1;  // Start column indexing from 1
+
+    // 209x6 Matrix to store attributes
+    Matrix A(209, 6);
+    // Create an array to hold PRP values
+    double arr_PRP[209];
+
+    // Indexting from 1
+    int rows = 1;
+    int cols = 1;
 
     while (getline(file, line)) {
         stringstream ss(line);
         string value;
 
-        int count6predattris =
+        int attributesCount =
             0;  // Track how many of the six attributes we've processed
-        int ignore1st2 = 0;  // Skip vendor name and model name
-        int loops = 0;       // Ensure we only process up to the PRP column
+        int ignoreNameCount = 0;  // Skip vendor name and model name
+        int loopsCount = 0;       // Ensure we only process up to the PRP column
 
-        while (getline(ss, value, ',') && loops < 9) {
-            if (ignore1st2 < 2) {
-                ignore1st2++;
-                loops++;
+        while (getline(ss, value, ',') && loopsCount < 9) {
+            if (ignoreNameCount < 2) {
+                ignoreNameCount++;
+                loopsCount++;
                 continue;  // Skip vendor and model
             }
 
-            if (count6predattris <
-                6) {  // Store predictive attributes into the matrix
+            // Store predictive attributes into the matrix
+            if (attributesCount < 6) {
                 A(rows, cols) = stoi(value);
                 cols++;
-                count6predattris++;
-                loops++;
+                attributesCount++;
+                loopsCount++;
                 continue;
             }
 
-            arr[rows - 1] = stoi(value);  // Store PRP into the array
-            loops++;
+            arr_PRP[rows - 1] = stoi(value);  // Store PRP into the array
+            loopsCount++;
         }
 
         cols = 1;  // Reset column for next row
         rows++;
     }
+    file.close();  // Clean up
 
-    Vector b(arr, 209);  // Convert the array to a Vector
-    file.close();        // Clean up
+    Vector b(arr_PRP, 209);  // Convert the array to a Vector
 
     // Split the data randomly. Ratio 80 : 20
     Matrix A_train(167, 6);
     Vector b_train(167);
     Matrix A_test(42, 6);
     Vector b_test(42);
+
     srand(time(0));  // seed the random number. Make it random everytime we run
                      // the program
+
     int ate0Percent = 0;        // count until 167 (80%)
     int tu0Percent = 0;         // count until 42 (20%)
     int currentRows_train = 1;  // For () in matrix
     int currentRows_test = 1;
+
     for (int i = 1; i <= 209; i++) {
         int ratio = rand() % 10;
-        if (ratio < 8 && ate0Percent <= 167) {
-            for (int j = 1; j <= 6; j++)
+
+        if ((ratio <= 8 && ate0Percent < 167) ||
+            (ratio > 8 && tu0Percent >= 42)) {
+            for (int j = 1; j <= 6; j++) {
                 A_train(currentRows_train, j) = A(i, j);
+            }
+
             b_train(currentRows_train) = b(i);
             currentRows_train++;
             ate0Percent++;
-        } else if (tu0Percent <= 42) {
-            for (int j = 1; j <= 6; j++) A_test(currentRows_test, j) = A(i, j);
+        } else if (tu0Percent < 42) {
+            for (int j = 1; j <= 6; j++) {
+                A_test(currentRows_test, j) = A(i, j);
+            }
+
             b_test(currentRows_test) = b(i);
             currentRows_test++;
             tu0Percent++;
         }
-        // if either set is full, fill the other
     }
 
     // Solve for x;
     LinearSystem system(&A_train, &b_train);
-    Vector result = system.SolveLeastSquares();  // Solve the normal equations
+    Vector result = system.Solve();  // Solve the normal equations
 
     // Now calculate RMSE
     double sumSquaredError = 0.0;
+
     for (int i = 1; i <= 42; i++) {
         double predicted = 0.0;
+
         for (int j = 1; j <= 6; j++) {
             predicted += A_test(i, j) * result(j);
         }
+
         double error = b_test(i) - predicted;
         sumSquaredError += error * error;
     }
+
     double RMSE = sqrt(sumSquaredError / 42);
 
     // Print result

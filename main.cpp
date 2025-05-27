@@ -27,14 +27,14 @@ void testing() {
     for (int i = 0; i < TESTS_COUNT; i++) {
         bool passed = tests[i]();
         if (passed) {
-            cout << "\033[32m" << "Test " << (i + 1) << " passed" << "\033[0m"
-                 << endl;
+            cout << GREEN << "Test " << (i + 1) << " passed" << RESET;
             testsPassed++;
         } else {
-            cout << "\033[31m" << "Test " << (i + 1) << " failed" << "\033[0m"
-                 << endl;
+            cout << RED << "Test " << (i + 1) << " failed" << RESET;
         }
     }
+    cout << "\n\n";
+
     if (testsPassed == TESTS_COUNT) {
         cout << GREEN;
     } else if (testsPassed == 0) {
@@ -42,8 +42,9 @@ void testing() {
     } else {
         cout << YELLOW;
     }
+
     cout << "Total Passed: " << testsPassed << "/" << TESTS_COUNT << "."
-         << "\033[0m";
+         << RESET << "\n";
 }
 
 int main() {

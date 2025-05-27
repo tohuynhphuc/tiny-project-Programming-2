@@ -78,7 +78,6 @@ Vector LinearSystem::Solve() const {
         }
         result(i + 1) /= aug(i + 1, i + 1);
     }
-    cout << "I GOT  THREE";
 
     return result;
 }
