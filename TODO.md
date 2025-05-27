@@ -53,5 +53,5 @@
 
 ## 4. Positive Symmetric Linear System
 
-- [ ] 29. Is Symmetric
+- [ ] 28. Is Symmetric
 - [ ] 30. Solve

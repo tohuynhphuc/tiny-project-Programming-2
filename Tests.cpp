@@ -590,6 +590,28 @@ bool test27() {
     return compare(x(1), 0.07) && compare(x(2), 0.14) && compare(x(3), 0.21);
 }
 
+bool test28() {
+    cout << YELLOW << "TEST 28" << RESET << "\n";
+    Matrix A_spd(2, 2);
+    A_spd(1, 1) = 4;
+    A_spd(1, 2) = 1;
+    A_spd(2, 1) = 1;
+    A_spd(2, 2) = 3;
+
+    double b_spd_arr[] = {1, 2};
+    Vector b_spd(b_spd_arr, 2);
+
+    PosSymLinSystem sys_spd(&A_spd, &b_spd);
+
+    cout << sys_spd.isSymmetric() << endl;
+
+    Vector x_spd = sys_spd.Solve();
+
+    cout << "x = " << x_spd.toString() << " (Expected: [0.0909,0.6364])"
+         << endl;
+    return fabs(x_spd(1) - 0.0909) < 1e-4 && fabs(x_spd(2) - 0.6364) < 1e-4;
+}
+
 // bool test24() {
 //     cout << YELLOW << "TEST 24" << RESET << "\n";
 
@@ -609,21 +631,21 @@ bool test27() {
 //     return true;
 // }
 
-bool test28() {
-    cout << YELLOW << "TEST 28" << RESET << "\n";
-    Matrix A_spd(2, 2);
-    A_spd(1, 1) = 4;
-    A_spd(1, 2) = 1;
-    A_spd(2, 1) = 1;
-    A_spd(2, 2) = 3;
-    double b_spd_arr[] = {1, 2};
-    Vector b_spd(b_spd_arr, 2);
-    PosSymLinSystem sys_spd(&A_spd, &b_spd);
-    Vector x_spd = sys_spd.Solve();
-    cout << "x = " << x_spd.toString() << " (Expected: [0.0909,0.6364])"
-         << endl;
-    return fabs(x_spd(1) - 0.0909) < 1e-4 && fabs(x_spd(2) - 0.6364) < 1e-4;
-}
+// bool test28() {
+//     cout << YELLOW << "TEST 28" << RESET << "\n";
+//     Matrix A_spd(2, 2);
+//     A_spd(1, 1) = 4;
+//     A_spd(1, 2) = 1;
+//     A_spd(2, 1) = 1;
+//     A_spd(2, 2) = 3;
+//     double b_spd_arr[] = {1, 2};
+//     Vector b_spd(b_spd_arr, 2);
+//     PosSymLinSystem sys_spd(&A_spd, &b_spd);
+//     Vector x_spd = sys_spd.Solve();
+//     cout << "x = " << x_spd.toString() << " (Expected: [0.0909,0.6364])"
+//          << endl;
+//     return fabs(x_spd(1) - 0.0909) < 1e-4 && fabs(x_spd(2) - 0.6364) < 1e-4;
+// }
 
 bool test29() {
     cout << YELLOW << "TEST 29 " << RESET << "\n";

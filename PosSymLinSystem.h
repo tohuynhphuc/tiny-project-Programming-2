@@ -8,7 +8,8 @@ class PosSymLinSystem : public LinearSystem {
     // Constructor
     PosSymLinSystem(Matrix *A, Vector *b) : LinearSystem(A, b) {}
 
-    int isSymmetric(const Matrix &A) const;
+    bool isPositiveDefinite() const;
+    bool isSymmetric() const;
     Vector Solve() const override;
 };
 
