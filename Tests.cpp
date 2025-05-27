@@ -695,31 +695,27 @@ bool test30() {
     srand(time(0));  // seed the random number. Make it random everytime we run
                      // the program
 
-    int ate0Percent = 0;        // count until 167 (80%)
-    int tu0Percent = 0;         // count until 42 (20%)
-    int currentRows_train = 1;  // For () in matrix
+    int currentRows_train = 1;
     int currentRows_test = 1;
 
     for (int i = 1; i <= 209; i++) {
         int ratio = rand() % 10;
 
-        if ((ratio <= 8 && ate0Percent < 167) ||
-            (ratio > 8 && tu0Percent >= 42)) {
+        if ((ratio <= 8 && currentRows_train <= 167) ||
+            (ratio > 8 && currentRows_test >= 42)) {
             for (int j = 1; j <= 6; j++) {
                 A_train(currentRows_train, j) = A(i, j);
             }
 
             b_train(currentRows_train) = b(i);
             currentRows_train++;
-            ate0Percent++;
-        } else if (tu0Percent < 42) {
+        } else if (currentRows_test <= 42) {
             for (int j = 1; j <= 6; j++) {
                 A_test(currentRows_test, j) = A(i, j);
             }
 
             b_test(currentRows_test) = b(i);
             currentRows_test++;
-            tu0Percent++;
         }
     }
 
@@ -745,7 +741,7 @@ bool test30() {
 
     // Print result
 
-    cout << "RMSE: " << RMSE << endl;
-    cout << "RESULT: " << result.toString() << "\n";
+    cout << BLUE << "RMSE: " << RMSE << endl;
+    cout << "RESULT: " << result.toString() << RESET << "\n";
     return true;
 }
