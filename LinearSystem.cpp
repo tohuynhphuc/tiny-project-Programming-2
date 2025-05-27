@@ -74,30 +74,34 @@ Vector LinearSystem::Solve() const {
     return result;
 }
 
-// In case there are seperate matrix and vector
-
-// Over - determined
+//* ----------Over-determined----------
 Vector LinearSystem::SolveLeastSquares() const {
+    //? Rows > Col
+    assert(mpA->getNumRows() >= mpA->getNumCols());
+
     Matrix At = mpA->transpose();
     Matrix AtA = At * (*mpA);
     Vector Atb = At * (*mpb);
+
     // Solve the normal equations AtA * x = Atb
     LinearSystem ls(&AtA, &Atb);
     return ls.Solve();
 }
 
+//* ----------Under-determined----------
 Vector LinearSystem::SolveMinimunNorm() const {
-    // Assume mpA is m x n, mpb is m x 1, m < n(under - determined)
-    Matrix At = mpA->transpose();  // n x m
-    Matrix AAt = (*mpA) * At;      // m x m
-    Vector temp(mSize);
+    //? Rows < Col
+    assert(mpA->getNumRows() <= mpA->getNumCols());
+
+    Matrix At = mpA->transpose();
+    Matrix AAt = (*mpA) * At;
 
     // Solve AAt * y = b for y
     LinearSystem sysAAt(&AAt, mpb);
     Vector y = sysAAt.Solve();
 
     // x = At * y
-    Vector x = At * y;  // n x 1
+    Vector x = At * y;
 
     return x;
 }

@@ -40,17 +40,16 @@
 - [x] 21. Determinant
 - [x] 22. Inverse
 - [x] 23. Transpose
+- [x] 24. Pseudo-Inverse
 
 ## 3. Linear System
 
 ### Constructors
-- [ ] 24. Default Constructor
-- [ ] 25. Copy Constructor
+- [x] 25. Constructors + Solve
 
 ### Solve
-- [ ] 26. Solve
-- [ ] 27. Solve Least Squares
-- [ ] 28. Solve Minimum Norm
+- [x] 26. Solve Least Squares
+- [x] 27. Solve Minimum Norm
 
 ## 4. Positive Symmetric Linear System
 

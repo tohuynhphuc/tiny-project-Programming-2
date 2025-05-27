@@ -488,8 +488,9 @@ bool test23() {
     Matrix m2(data2, 4, 4);
 
     cout << m1.toString();
-    cout << "Expected: \n[[3, 5, 5, 9],\n [1, 9, 3, 7],\n [4, 2, 5, 9],\n [1, "
-            "6, 8, 3]]\n";
+    cout
+        << "\nExpected: \n[[3, 5, 5, 9],\n [1, 9, 3, 7],\n [4, 2, 5, 9],\n [1, "
+           "6, 8, 3]]\n";
 
     return m1(1, 1) == m2(1, 1) && m1(1, 2) == m2(1, 2) &&
            m1(1, 3) == m2(1, 3) && m1(1, 4) == m2(1, 4) &&
@@ -504,29 +505,32 @@ bool test23() {
 bool test24() {
     cout << YELLOW << "TEST 24" << RESET << "\n";
 
-    Matrix A(3, 3);
-    A(1, 1) = 25;
-    A(1, 2) = 15;
-    A(1, 3) = -5;
-    A(2, 1) = 15;
-    A(2, 2) = 18;
-    A(2, 3) = 0;
-    A(3, 1) = -5;
-    A(3, 2) = 0;
-    A(3, 3) = 11;
+    double** data1 = new double*[2];
+    data1[0] = new double[3]{3, 1, 4};
+    data1[1] = new double[3]{1, 5, 9};
+    Matrix m1(data1, 2, 3);
+    Matrix inverse = m1.pseudoInverse();
 
-    double b_arr[] = {35, 33, 6};
-    Vector b(b_arr, 3);
+    double** dataOutput = new double*[3];
+    dataOutput[0] = new double[2]{0.33, -0.13};
+    dataOutput[1] = new double[2]{-0.13, 0.10};
+    dataOutput[2] = new double[2]{0.04, 0.07};
+    Matrix expectedOutput(dataOutput, 3, 2);
 
-    PosSymLinSystem sys(&A, &b);
-    Vector x = sys.Solve();
-    cout << "x = " << x.toString() << " (Expected: [1, 1, 1])" << endl;
+    cout << "Pseudo-Inverse = \n" << inverse.toString() << "\n";
+    cout << "Expected: \n" << expectedOutput.toString() << "\n";
 
-    return true;
+    return compare(inverse(1, 1), expectedOutput(1, 1)) &&
+           compare(inverse(1, 2), expectedOutput(1, 2)) &&
+           compare(inverse(2, 1), expectedOutput(2, 1)) &&
+           compare(inverse(2, 2), expectedOutput(2, 2)) &&
+           compare(inverse(3, 1), expectedOutput(3, 1)) &&
+           compare(inverse(3, 2), expectedOutput(3, 2));
 }
 
 bool test25() {
-    cout << YELLOW << "TEST 23" << RESET << "\n";
+    cout << YELLOW << "TEST 25" << RESET << "\n";
+
     Matrix A1(3, 3);
     A1(1, 1) = 2;
     A1(1, 2) = 1;
@@ -542,15 +546,68 @@ bool test25() {
     Vector b1(b1_arr, 3);
 
     LinearSystem sys1(&A1, &b1);
-    Vector x1 = sys1.Solve();
-    cout << "LinearSystem::Solve() solution: " << x1.toString()
-         << " (Expected: [2, 3, -1])" << endl;
-    return true;
+    LinearSystem sys2(sys1);
+    Vector x1 = sys2.Solve();
+
+    cout << "Solution: " << x1.toString() << "\nExpected: [2, 3, -1]" << endl;
+    return compare(x1(1), 2) && compare(x1(2), 3) && compare(x1(3), -1);
 }
 
-bool test26() { return true; }
+bool test26() {
+    cout << YELLOW << "TEST 26" << RESET << "\n";
 
-bool test27() { return true; }
+    double** data1 = new double*[3];
+    data1[0] = new double[2]{7, 8};
+    data1[1] = new double[3]{4, 6};
+    data1[2] = new double[3]{5, 0};
+    Matrix A(data1, 3, 2);
+
+    double dataB[] = {1, -2, 4};
+    Vector b(dataB, 3);
+
+    LinearSystem sys(&A, &b);
+    Vector x = sys.SolveLeastSquares();
+
+    cout << "Solution: " << x.toString() << "\nExpected: [0.85, -0.72]" << endl;
+    return compare(x(1), 0.85) && compare(x(2), -0.72);
+}
+
+bool test27() {
+    cout << YELLOW << "TEST 27" << RESET << "\n";
+
+    double** data1 = new double*[1];
+    data1[0] = new double[3]{1, 2, 3};
+    Matrix A(data1, 1, 3);
+
+    double dataB[] = {1};
+    Vector b(dataB, 1);
+
+    LinearSystem sys(&A, &b);
+    Vector x = sys.SolveMinimunNorm();
+
+    cout << "Solution: " << x.toString() << "\nExpected: [0.07, 0.14, 0.21]"
+         << endl;
+    return compare(x(1), 0.07) && compare(x(2), 0.14) && compare(x(3), 0.21);
+}
+
+// bool test24() {
+//     cout << YELLOW << "TEST 24" << RESET << "\n";
+
+//     double** data = new double*[3];
+//     data[0] = new double[3]{25, 15, -5};
+//     data[1] = new double[3]{15, 18, 0};
+//     data[2] = new double[3]{-5, 0, 11};
+//     Matrix A(data, 3, 3);
+
+//     double b_arr[] = {35, 33, 6};
+//     Vector b(b_arr, 3);
+
+//     PosSymLinSystem sys(&A, &b);
+//     Vector x = sys.Solve();
+//     cout << "x = " << x.toString() << " (Expected: [1, 1, 1])" << endl;
+
+//     return true;
+// }
 
 bool test28() {
     cout << YELLOW << "TEST 28" << RESET << "\n";

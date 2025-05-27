@@ -463,43 +463,47 @@ Matrix Matrix::inverse() const {
 
 //* Pseudo Inverse in a non-square matrix
 Matrix Matrix::pseudoInverse() const {
-	if (this->mNumRows == this->mNumCols) {return this->inverse();}
+    if (mNumRows == mNumCols) {
+        return inverse();
+    }
 
-	// check if rank is full
-	int rank = (this->mNumRows < this->mNumCols) ? this->mNumRows : this->mNumCols;
-	bool found_rank = false;
+    // check if rank is full
+    int rank = min(mNumRows, mNumCols);
+    bool found_rank = false;
 
-	for (int start_r = 0; start_r <= this->mNumRows - rank && !found_rank; start_r++) {
-		for (int start_c = 0; start_c <= this->mNumCols - rank && !found_rank; start_c++) {
-			Matrix submatrix = Matrix(rank, rank);
-			// copy data to submatrix
-			for (int i = start_r; i < start_r + rank; i++) {
-				for (int j = start_c; j < start_c + rank; j++) {
-					submatrix.mData[i - start_r][j - start_c] = this->mData[i][j];
-				}
-			}
-			if (submatrix.determinant() != 0) {
-				found_rank = true;
-				continue;
-			}
-		}
-	}
+    for (int start_r = 0; start_r <= mNumRows - rank && !found_rank;
+         start_r++) {
+        for (int start_c = 0; start_c <= mNumCols - rank && !found_rank;
+             start_c++) {
+            Matrix submatrix = Matrix(rank, rank);
+            // copy data to submatrix
+            for (int i = start_r; i < start_r + rank; i++) {
+                for (int j = start_c; j < start_c + rank; j++) {
+                    submatrix.mData[i - start_r][j - start_c] = mData[i][j];
+                }
+            }
+            if (submatrix.determinant() != 0) {
+                found_rank = true;
+                continue;
+            }
+        }
+    }
 
-	if (!found_rank) {
-		throw runtime_error("Matrix has neither full row rank nor full column rank, cannot find pseudo-inverse");
-	}
+    //? Matrix has neither full row rank nor full column rank, cannot find
+    //? pseudo-inverse
+    assert(found_rank);
 
-	Matrix result;
-	Matrix transpose = this->transpose();
-	if (rank == this->mNumRows) {
-		// full row rank, use right inverse
-		result = transpose.operator*((this->operator*(transpose)).inverse());
-	} else {
-		// full column rank, use left inverse
-		result = ((transpose.operator*(*this)).inverse()).operator*(transpose);
-	}
+    Matrix result;
+    Matrix transpose = this->transpose();
+    if (rank == mNumRows) {
+        //& full row rank, use right inverse
+        result = transpose * ((*this) * transpose).inverse();
+    } else {
+        //& full column rank, use left inverse
+        result = (transpose * (*this)).inverse() * transpose;
+    }
 
-	return result;
+    return result;
 }
 
 //* Transpose
