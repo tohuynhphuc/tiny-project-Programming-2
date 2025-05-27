@@ -24,7 +24,7 @@ class LinearSystem {
     virtual Vector Solve() const;
 
     Vector SolveLeastSquares() const;
-    Vector SolveMinimunNorm() const;
+    Vector SolveMinimumNorm() const;
 };
 
 #endif

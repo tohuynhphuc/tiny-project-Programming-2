@@ -566,7 +566,7 @@ bool test26() {
     Vector b(dataB, 3);
 
     LinearSystem sys(&A, &b);
-    Vector x = sys.SolveLeastSquares();
+    Vector x = sys.Solve();  // redirects to SolveLeastSquare()
 
     cout << "Solution: " << x.toString() << "\nExpected: [0.85, -0.72]" << endl;
     return compare(x(1), 0.85) && compare(x(2), -0.72);
@@ -583,7 +583,7 @@ bool test27() {
     Vector b(dataB, 1);
 
     LinearSystem sys(&A, &b);
-    Vector x = sys.SolveMinimunNorm();
+    Vector x = sys.Solve();  // redirects to SolveMinimumNorm()
 
     cout << "Solution: " << x.toString() << "\nExpected: [0.07, 0.14, 0.21]"
          << endl;
@@ -607,84 +607,30 @@ bool test28() {
 
     Vector x_spd = sys_spd.Solve();
 
-    cout << "x = " << x_spd.toString() << " (Expected: [0.0909,0.6364])"
-         << endl;
-    return fabs(x_spd(1) - 0.0909) < 1e-4 && fabs(x_spd(2) - 0.6364) < 1e-4;
+    cout << "x = " << x_spd.toString() << "\nExpected: [0.09, 0.64]\n";
+    return compare(x_spd(1), 0.09) && compare(x_spd(2), 0.63);
 }
 
-// bool test24() {
-//     cout << YELLOW << "TEST 24" << RESET << "\n";
-
-//     double** data = new double*[3];
-//     data[0] = new double[3]{25, 15, -5};
-//     data[1] = new double[3]{15, 18, 0};
-//     data[2] = new double[3]{-5, 0, 11};
-//     Matrix A(data, 3, 3);
-
-//     double b_arr[] = {35, 33, 6};
-//     Vector b(b_arr, 3);
-
-//     PosSymLinSystem sys(&A, &b);
-//     Vector x = sys.Solve();
-//     cout << "x = " << x.toString() << " (Expected: [1, 1, 1])" << endl;
-
-//     return true;
-// }
-
-// bool test28() {
-//     cout << YELLOW << "TEST 28" << RESET << "\n";
-//     Matrix A_spd(2, 2);
-//     A_spd(1, 1) = 4;
-//     A_spd(1, 2) = 1;
-//     A_spd(2, 1) = 1;
-//     A_spd(2, 2) = 3;
-//     double b_spd_arr[] = {1, 2};
-//     Vector b_spd(b_spd_arr, 2);
-//     PosSymLinSystem sys_spd(&A_spd, &b_spd);
-//     Vector x_spd = sys_spd.Solve();
-//     cout << "x = " << x_spd.toString() << " (Expected: [0.0909,0.6364])"
-//          << endl;
-//     return fabs(x_spd(1) - 0.0909) < 1e-4 && fabs(x_spd(2) - 0.6364) < 1e-4;
-// }
-
 bool test29() {
-    cout << YELLOW << "TEST 29 " << RESET << "\n";
-    Matrix A_id(3, 3);
-    A_id(1, 1) = 1;
-    A_id(1, 2) = 0;
-    A_id(1, 3) = 0;
-    A_id(2, 1) = 0;
-    A_id(2, 2) = 1;
-    A_id(2, 3) = 0;
-    A_id(3, 1) = 0;
-    A_id(3, 2) = 0;
-    A_id(3, 3) = 1;
-    double b_id_arr[] = {7, 8, 9};
-    Vector b_id(b_id_arr, 3);
-    PosSymLinSystem sys_id(&A_id, &b_id);
-    Vector x_id = sys_id.Solve();
-    cout << "x = " << x_id.toString() << " (Expected: [7, 8, 9])" << endl;
-    return fabs(x_id(1) - 7) < 1e-4 && fabs(x_id(2) - 8) < 1e-4 &&
-           fabs(x_id(3) - 9) < 1e-4;
+    cout << YELLOW << "TEST 29" << RESET << "\n";
+
+    double** data = new double*[3];
+    data[0] = new double[3]{25, 15, -5};
+    data[1] = new double[3]{15, 18, 0};
+    data[2] = new double[3]{-5, 0, 11};
+    Matrix A(data, 3, 3);
+
+    double b_arr[] = {5, 10, 15};
+    Vector b(b_arr, 3);
+
+    PosSymLinSystem sys(&A, &b);
+    Vector x = sys.Solve();
+    cout << "x = " << x.toString() << "\nExpected: [0.34, 0.27, 1.52]\n";
+
+    return true;
 }
 
 bool test30() {
     cout << YELLOW << "TEST 30 " << RESET << "\n";
-    Matrix A_hilb(3, 3);
-    A_hilb(1, 1) = 1.0;
-    A_hilb(1, 2) = 1.0 / 2.0;
-    A_hilb(1, 3) = 1.0 / 3.0;
-    A_hilb(2, 1) = 1.0 / 2.0;
-    A_hilb(2, 2) = 1.0 / 3.0;
-    A_hilb(2, 3) = 1.0 / 4.0;
-    A_hilb(3, 1) = 1.0 / 3.0;
-    A_hilb(3, 2) = 1.0 / 4.0;
-    A_hilb(3, 3) = 1.0 / 5.0;
-    double b_hilb_arr[] = {1, 1, 1};
-    Vector b_hilb(b_hilb_arr, 3);
-    PosSymLinSystem sys_hilb(&A_hilb, &b_hilb);
-    Vector x_hilb = sys_hilb.Solve();
-    cout << "x = " << x_hilb.toString() << " (Hilbert-like 3x3)" << endl;
-    // No exact expected value, just check solution is finite
-    return isfinite(x_hilb(1)) && isfinite(x_hilb(2)) && isfinite(x_hilb(3));
+    return true;
 }

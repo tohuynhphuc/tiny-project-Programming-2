@@ -11,7 +11,7 @@ class Vector {
 
    public:
     //* Constructors
-    Vector(int size);                  // Size input
+    Vector(int size = 0);              // Size input
     Vector(double array[], int size);  // Array input
     Vector(const Vector& other);       // Vector input
 

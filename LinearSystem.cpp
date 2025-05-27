@@ -25,6 +25,13 @@ LinearSystem::LinearSystem(const LinearSystem &ls) {
 }
 
 Vector LinearSystem::Solve() const {
+    //& Check when not square matrix
+    if (mpA->getNumRows() > mpA->getNumCols()) {
+        return this->SolveLeastSquares();
+    } else if (mpA->getNumRows() < mpA->getNumCols()) {
+        return this->SolveMinimumNorm();
+    }
+
     //& 1. Form augmented matrix [A | b]
     Matrix aug(mSize, mSize + 1);  // Augmented matrix
     Vector result(mSize);          // Result vector
@@ -89,7 +96,7 @@ Vector LinearSystem::SolveLeastSquares() const {
 }
 
 //* ----------Under-determined----------
-Vector LinearSystem::SolveMinimunNorm() const {
+Vector LinearSystem::SolveMinimumNorm() const {
     //? Rows < Col
     assert(mpA->getNumRows() <= mpA->getNumCols());
 

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "Vector.h"
+
 using namespace std;
 
 bool PosSymLinSystem::isSymmetric() const {
@@ -25,7 +27,12 @@ bool PosSymLinSystem::isSymmetric() const {
 bool PosSymLinSystem::isPositiveDefinite() const { return true; }
 
 Vector PosSymLinSystem::Solve() const {
-    assert(isSymmetric() && isPositiveDefinite());
+    if (!(isSymmetric() && isPositiveDefinite())) {
+        cout << "Cannot solve because system is not positive definite "
+                "symmetric\n";
+        Vector v(mSize);
+        return v;
+    }
 
     int max_interations = 1000;
     double tolerance = 1e-10;
