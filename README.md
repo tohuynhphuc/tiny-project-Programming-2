@@ -63,6 +63,25 @@ In Part B, you will apply linear regression to predict relative CPU performance 
 - `LinearRegression.h` / `LinearRegression.cpp`: Implementations for the Linear Regression part.
 - `README.md`: Overview and instructions for the project.
 
+## Compilation and Execution
+1. Clone the repository to an empty local directory:
+```bash
+$ git clone git@github.com:tohuynhphuc/tiny-project-Programming-2.git
+```
+
+2. Compile the project using a C++ compiler (in this case we used g++):
+```bash
+$ g++ main.cpp tests.cpp LinearSystem.cpp Matrix.cpp PosSymLinSystem.cpp Vector.cpp -o main
+```
+**Note:** `tests.cpp`, `LinearSystem.cpp`, `Matrix.cpp`, `PosSymLinSystem.cpp`, and `Vector.cpp` are all dependencies for `main.cpp`. They contain essential structure and function definitions required to run the program.
+
+3. After which a `main.exe` executable will be created. You can run the executable with:
+```bash
+$ ./main
+```
+
+4. `main.exe` composes of 30 custom tests to verify various functionalities of the classes and methods implemented in the project. Output and test results will be displayed in the console.
+
 ## License
 
 This project is licensed under the GNU v3 GENERAL PUBLIC LICENSE - see the [LICENSE](LICENSE) file for details.
